@@ -3,7 +3,7 @@ class_name Enemy
 
 var bullet_object := preload("res://Nodes/Bullet.tscn")
 
-export var life := 1.0
+export var life := 600.0
 
 export var shoot_delay := 5.0
 
@@ -19,8 +19,9 @@ var orbit_angle := 0.0
 var orbit_direction := 1 
 var speed = 0.1
 
+var is_alive = true
 
-onready var sprite = $Sprite
+onready var sprite = $ufo
 
 func _ready():
 	randomize()
@@ -42,10 +43,11 @@ func _physics_process(delta):
 #	position = lerp(position, orbit_position, 0.01)
 	
 	sprite.rotation = (position.angle())
-
+	damege()
 		
 		
 func spawn():
+	$explosion.rotation = rand_range(0,TAU) 
 	orbit_distance += rand_range(-10,10)
 	speed += rand_range(-0.01,0.01)
 	orbit_angle = rand_range( 0, TAU )
@@ -60,10 +62,20 @@ func shoot():
 	get_parent().add_child( new_bullet )
 	new_bullet.velocity = - position.normalized().rotated(-PI/2.0) * 100
 	new_bullet.position = position
+	new_bullet.dmg = 10000
+	new_bullet.dmg_radius = 100
 	
 
 func damege():
 	life -= 1
+	if is_alive && life <= 0:
+		is_alive = false
+		$Particles2D.process_material.set("gravity", - position.normalized() * globals.gravity_scale)
+		$Player.play("boom")
 	
 func _on_Timer_timeout():
 	shoot()
+
+
+func clear():
+	queue_free()
