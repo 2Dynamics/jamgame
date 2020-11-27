@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fighter.png-7861bcb32a0d163b33e29a10af2ff241.stex"
+path="res://.import/laser.png-44ae4b0646c7dfc310e18c940fb1cb7b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/fighter.png"
-dest_files=[ "res://.import/fighter.png-7861bcb32a0d163b33e29a10af2ff241.stex" ]
+source_file="res://sprite/laser.png"
+dest_files=[ "res://.import/laser.png-44ae4b0646c7dfc310e18c940fb1cb7b.stex" ]
 
 [params]
 

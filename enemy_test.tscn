@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Nodes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprite/core.png" type="Texture" id=2]
+[ext_resource path="res://enemy_test.gd" type="Script" id=3]
+
+[node name="enemy_test" type="Node2D"]
+position = Vector2( 516.721, 308.251 )
+script = ExtResource( 3 )
+
+[node name="Enemy" parent="." instance=ExtResource( 1 )]
+position = Vector2( 738.534, -299.454 )
+spawn_distance = 600.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
