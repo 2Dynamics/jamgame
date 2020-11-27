@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Dyamic_grid_shader.shader" type="Shader" id=1]
+[ext_resource path="res://crack.png" type="Texture" id=2]
+[ext_resource path="res://rgb_noise.png" type="Texture" id=3]
+[ext_resource path="res://terrain_textures.png" type="TextureArray" id=4]
+[ext_resource path="res://noise.jpg" type="Texture" id=5]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/global_transform = null
+shader_param/cutoff = 0.99
+shader_param/random_blur = 0.001
+shader_param/blur_amount = 4.208
+shader_param/dirt_tile_mul = 0.5
+shader_param/crack_tile_mul = 0.049
+shader_param/noise_tile_mul = 30.0
+shader_param/random_noise_mul = 25.016
+shader_param/show_hidden = 0.0
+shader_param/crack_tiled = ExtResource( 2 )
+shader_param/noise_tiled = ExtResource( 5 )
+shader_param/random_noise = ExtResource( 3 )
+shader_param/terrain_texture_mix = ExtResource( 4 )
+
+[sub_resource type="MaterialData" id=2]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="DynamicGridMap" type="DynamicGridMap" parent="."]
+material = SubResource( 1 )
+material_data = SubResource( 2 )
+texture_path = "res://full.png"
