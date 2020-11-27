@@ -13,8 +13,11 @@ func _physics_process(delta: float) -> void:
 	var grav = global_position.direction_to(center.global_position)
 	rotation = lerp_angle(rotation, grav.angle() - PI/2, 0.1)
 	
+	
 	if global_position.distance_to(center.global_position) > 200: #tymczasowe
 		velocity += grav * 1000 * delta
+	else:
+		velocity= Vector2(0,0)
 	velocity += move * 400 * delta
 	velocity *= 0.95
 	

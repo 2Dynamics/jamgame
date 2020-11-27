@@ -7,16 +7,16 @@
 [ext_resource path="res://noise.jpg" type="Texture" id=5]
 [ext_resource path="res://globals.gd" type="Script" id=6]
 
-[sub_resource type="ShaderMaterial" id=1]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 1 )
 shader_param/global_transform = null
 shader_param/cutoff = 0.99
 shader_param/random_blur = 0.001
 shader_param/blur_amount = 2.5
 shader_param/dirt_tile_mul = 0.489
-shader_param/crack_tile_mul = 0.049
-shader_param/noise_tile_mul = 30.0
-shader_param/random_noise_mul = 25.016
+shader_param/crack_tile_mul = 5.0
+shader_param/noise_tile_mul = -0.032
+shader_param/random_noise_mul = 25.0
 shader_param/show_hidden = 0.0
 shader_param/crack_tiled = ExtResource( 2 )
 shader_param/noise_tiled = ExtResource( 5 )
@@ -28,7 +28,7 @@ shader_param/terrain_texture_mix = ExtResource( 4 )
 [node name="Node2D" type="Node2D"]
 
 [node name="DynamicGridMap" type="DynamicGridMap" parent="."]
-material = SubResource( 1 )
+material = SubResource( 3 )
 material_data = SubResource( 2 )
 texture_path = "res://full.png"
 script = ExtResource( 6 )

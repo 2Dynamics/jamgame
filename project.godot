@@ -13,15 +13,25 @@ _global_script_classes=[ {
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://Scripts/Bullet.gd"
+}, {
+"base": "Node2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Scripts/Enemy.gd"
 } ]
 _global_script_class_icons={
-"Bullet": ""
+"Bullet": "",
+"Enemy": ""
 }
 
 [application]
 
 config/name="Mars Defense"
 run/main_scene="res://PlayerTest.tscn"
+
+[autoload]
+
+globals="*res://globals.gd"
 
 [display]
 
