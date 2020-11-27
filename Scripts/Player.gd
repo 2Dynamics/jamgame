@@ -4,6 +4,7 @@ export var player: int
 
 var center: Node2D
 var velocity: Vector2
+onready var aim= $Sprite/aim
 
 func _physics_process(delta: float) -> void:
 	var move: Vector2
@@ -27,6 +28,18 @@ func _physics_process(delta: float) -> void:
 	
 	if(Input.is_action_just_pressed("ui_accept")):
 		globals.draw_explosion(get_global_mouse_position(),128,8555)
+		
+		
+	var deadzone = 0.5
+	var controllerangle = Vector2.ZERO
+	var xAxisRL = Input.get_joy_axis(player, JOY_AXIS_2)
+	var yAxisUD = Input.get_joy_axis(player ,JOY_AXIS_3)
+
+	if abs(xAxisRL) > deadzone || abs(yAxisUD) > deadzone:
+
+		controllerangle = Vector2(xAxisRL, yAxisUD).angle()
+		aim.global_rotation = controllerangle+PI*0.5
+	
 
 func action(action: String):
 	return str("p", player, "_", action)
