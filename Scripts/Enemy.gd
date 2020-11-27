@@ -60,7 +60,7 @@ func shoot():
 	get_parent().add_child( new_bullet )
 	new_bullet.velocity = - position.normalized().rotated(-PI/2.0) * 100
 	new_bullet.position = position
-	new_bullet.dmg = 10000
+	new_bullet.dmg = 20000
 	new_bullet.dmg_radius = 100
 	
 
