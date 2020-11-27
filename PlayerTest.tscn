@@ -11,9 +11,8 @@
 script/source = "extends Node2D
 
 func _ready() -> void:
-	var center = $Center
-	for node in get_tree().get_nodes_in_group(\"falling\"):
-		node.center = center
+	globals.center = $Center
+	globals.map = $DynamicGridMap
 "
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -50,9 +49,9 @@ position = Vector2( 1634.86, 479.692 )
 player = 1
 
 [node name="Center" type="Position2D" parent="."]
-position = Vector2( 976.439, 878.165 )
+position = Vector2( 980, 880 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 981.014, 882.595 )
+position = Vector2( 980, 880 )
 current = true
 zoom = Vector2( 2, 2 )
