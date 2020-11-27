@@ -25,6 +25,8 @@ onready var sprite = $ufo
 
 func _ready():
 	randomize()
+	$ufo.visible = true
+	$explosion.visible = false
 	$Timer.wait_time = shoot_delay
 	spawn()
 
