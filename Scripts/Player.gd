@@ -13,16 +13,20 @@ func _physics_process(delta: float) -> void:
 	var grav = global_position.direction_to(globals.center.global_position)
 	rotation = lerp_angle(rotation, grav.angle() - PI/2, 0.1)
 	
-	var raycast = globals.map.raycast(global_position, global_position + grav * 32)
-	if not raycast.collision:
-		velocity += grav * 1000 * delta
-	else:
-		velocity= Vector2()
-	
-	velocity += move * 400 * delta
+	velocity += grav * 1000 * delta
+	velocity += move.rotated(grav.angle() - PI/2) * 1200 * delta
 	velocity *= 0.95
 	
+	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
+	if raycast.collision:
+		velocity = velocity.slide(-grav)
+		if raycast.pixel_number < 9:
+			position -= grav * (9 - raycast.pixel_number)
+	
 	position += velocity * delta
+	
+	if(Input.is_action_just_pressed("ui_accept")):
+		globals.draw_explosion(get_global_mouse_position(),128,8555)
 
 func action(action: String):
 	return str("p", player, "_", action)
