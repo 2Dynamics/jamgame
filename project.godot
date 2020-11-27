@@ -13,6 +13,10 @@ config_version=4
 config/name="Mars Defense"
 run/main_scene="res://PlayerTest.tscn"
 
+[display]
+
+window/dpi/allow_hidpi=true
+
 [input]
 
 p0_up={

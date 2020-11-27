@@ -17,5 +17,9 @@ script = SubResource( 1 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 279.938, 129.439 )
 
+[node name="Player2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 691.933, 153.377 )
+player = 1
+
 [node name="Center" type="Position2D" parent="."]
 position = Vector2( 525.387, 318.76 )
