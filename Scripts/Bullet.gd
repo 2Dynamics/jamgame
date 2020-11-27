@@ -6,7 +6,7 @@ var velocity := Vector2.ZERO
 var dmg := 0
 var dmg_radius := 0
 var center_of_gravity := Vector2.ZERO
-var gravicy_accel_val := 9.8
+var gravicy_accel_val := 98.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +18,7 @@ func _physics_process(delta):
 	position += velocity * delta + (accel * delta * delta) / 2
 	velocity += accel * delta
 	accel = Vector2.ZERO
-	rotate(velocity.angle())
+	rotation = (velocity.angle())
 
 	if collideWithMap():
 		#queue_free()
