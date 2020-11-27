@@ -1,5 +1,5 @@
 extends Area2D
-
+var bullet_scene= preload("res://Nodes/Bullet.tscn")
 export var player: int
 
 var center: Node2D
@@ -41,6 +41,15 @@ func _physics_process(delta: float) -> void:
 
 		controllerangle = Vector2(xAxisRL, yAxisUD).angle()
 		aim.global_rotation = controllerangle+PI*0.5
+		
+	if Input.is_action_just_pressed(action("shoot")):
+		var bullet=bullet_scene.instance()
+		bullet.global_position=aim.global_position
+		bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
+		bullet.dmg=10000
+		bullet.dmg_radius=60
+		
+		get_parent().add_child(bullet)
 	
 
 func action(action: String):
