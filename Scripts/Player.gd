@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	velocity *= 0.95
 	
 	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
-	if raycast.collision:
+	if raycast:
 		velocity = velocity.slide(-grav)
 		if raycast.pixel_number < 9:
 			position -= grav * (9 - raycast.pixel_number)
