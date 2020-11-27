@@ -13,14 +13,13 @@ func _physics_process(delta: float) -> void:
 	var grav = global_position.direction_to(globals.center.global_position)
 	rotation = lerp_angle(rotation, grav.angle() - PI/2, 0.1)
 	
-	var raycast = globals.map.raycast(global_position, global_position + grav * 32)
-	if not raycast.collision:
-		velocity += grav * 1000 * delta
-	else:
-		velocity= Vector2()
-	
-	velocity += move * 400 * delta
+	velocity += grav * 1000 * delta
+	velocity += move * 1200 * delta
 	velocity *= 0.95
+	
+	var raycast = globals.map.raycast(global_position, global_position + grav * 32)
+	if raycast.collision:
+		velocity = velocity.slide(-grav)
 	
 	position += velocity * delta
 
