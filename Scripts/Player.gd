@@ -6,8 +6,6 @@ var center: Node2D
 var velocity: Vector2
 var prev_move: Vector2
 
-var move_angle: float
-var angle_diff: float
 onready var aim= $Sprite/aim
 
 func _physics_process(delta: float) -> void:
@@ -17,17 +15,9 @@ func _physics_process(delta: float) -> void:
 	move.y = int(Input.is_action_pressed(action("down"))) - int(Input.is_action_pressed(action("up")))
 	
 	rotation = lerp_angle(rotation, grav.angle() - PI/2, 0.1)
-	if move != Vector2():
-		if prev_move == Vector2():
-			angle_diff = grav.angle() - PI/2
-		move_angle = grav.angle() - PI/2 - angle_diff
-	else:
-		move_angle = 0
-		angle_diff = 0
-	prev_move = move
 	
 	velocity += grav * 1000 * delta
-	velocity += move.rotated(move_angle) * 1200 * delta
+	velocity += move * 1200 * delta
 	velocity *= 0.95
 	
 	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
