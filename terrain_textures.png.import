@@ -1,0 +1,24 @@
+[remap]
+
+importer="texture_array"
+type="TextureArray"
+path="res://.import/terrain_textures.png-0c9362fd1bb77c984ba1622bfc6ade56.texarr"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://terrain_textures.png"
+dest_files=[ "res://.import/terrain_textures.png-0c9362fd1bb77c984ba1622bfc6ade56.texarr" ]
+
+[params]
+
+compress/mode=0
+compress/no_bptc_if_rgb=false
+flags/repeat=1
+flags/filter=true
+flags/mipmaps=true
+flags/srgb=2
+slices/horizontal=4
+slices/vertical=4
