@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+func _ready() -> void:
+	var center = $Center
+	for node in get_tree().get_nodes_in_group(\"falling\"):
+		node.center = center
+"
+
+[node name="Node2D" type="Node2D"]
+script = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 279.938, 129.439 )
+
+[node name="Center" type="Position2D" parent="."]
+position = Vector2( 525.387, 318.76 )
