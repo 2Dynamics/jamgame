@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Dyamic_grid_shader.shader" type="Shader" id=1]
 [ext_resource path="res://crack.png" type="Texture" id=2]
@@ -6,8 +6,9 @@
 [ext_resource path="res://terrain_textures.png" type="TextureArray" id=4]
 [ext_resource path="res://noise.jpg" type="Texture" id=5]
 [ext_resource path="res://globals.gd" type="Script" id=6]
+[ext_resource path="res://Nodes/Enemy.tscn" type="PackedScene" id=7]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
 shader_param/global_transform = null
 shader_param/cutoff = 0.99
@@ -28,7 +29,18 @@ shader_param/terrain_texture_mix = ExtResource( 4 )
 [node name="Node2D" type="Node2D"]
 
 [node name="DynamicGridMap" type="DynamicGridMap" parent="."]
-material = SubResource( 3 )
+material = SubResource( 1 )
 material_data = SubResource( 2 )
 texture_path = "res://full.png"
 script = ExtResource( 6 )
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2( 975.44, 896.396 )
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 7 )]
+spawn_distance = 900.0
+orbit_distance = 800.0
+
+[node name="Camera2D" type="Camera2D" parent="Enemies"]
+current = true
+zoom = Vector2( 2, 2 )
