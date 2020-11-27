@@ -22,6 +22,9 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.slide(-grav)
 	
 	position += velocity * delta
+	
+	if(Input.is_action_just_pressed("ui_accept")):
+		globals.draw_explosion(get_global_mouse_position(),128,8555)
 
 func action(action: String):
 	return str("p", player, "_", action)
