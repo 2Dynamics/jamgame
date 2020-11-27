@@ -1,10 +1,10 @@
 extends Node2D
 class_name Bullet
 
-var accel := Vector2.ZERO
 var velocity := Vector2.ZERO
 var dmg := 0
 var dmg_radius := 0
+var accel := Vector2.ZERO
 var center_of_gravity := Vector2.ZERO
 var gravicy_accel_val := 98.0
 
@@ -21,8 +21,7 @@ func _physics_process(delta):
 	rotation = (velocity.angle())
 
 	if collideWithMap():
-		globals.map.update_grid_penetrating_explosive_damage_circle(global_position, 100, 1000000, 0.5)
-		globals.map.update_texture(global_position, Vector2(100, 100))
+		globals.draw_explosion(global_position, dmg_radius, dmg)
 		queue_free()
 		# todo
 		pass
