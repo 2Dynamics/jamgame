@@ -18,5 +18,5 @@ func _ready():
 
 func _on_core_area_entered(area):
 	if area is Bullet:
-		print("ENDGAME")
+		($"../endgame_timer" as Timer).start()
 	pass # Replace with function body.

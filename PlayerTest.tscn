@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://crack.png" type="Texture" id=2]
@@ -10,12 +10,18 @@
 [ext_resource path="res://sprite/bg.png" type="Texture" id=8]
 [ext_resource path="res://sprite/core.png" type="Texture" id=9]
 [ext_resource path="res://Nodes/TeslaSpawner.tscn" type="PackedScene" id=10]
+[ext_resource path="res://core.gd" type="Script" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+var pickupableitem_object := load(\"res://Nodes/PickupableItem.tscn\")
+
 var spawn_pickupable_time = 20
 var spawn_pickupable_timer = 0
+
+var min_spawn_pickupableitem_radius = 80
+var max_spawn_pickupableitem_radius = 300
 
 func _ready() -> void:
 	randomize()
@@ -23,13 +29,29 @@ func _ready() -> void:
 	globals.map = $DynamicGridMap
 
 
+	
+
+
 func _process(delta):
 	if spawn_pickupable_timer < spawn_pickupable_time:
 		spawn_pickupable_timer += delta
 	else:
-		var pickupable_item = load(\"res://Scripts/PickupableItem.gd\").new()
-		pickupable_item
+		spawn_pickupable_timer = 0
+		var spawn_radius = rand_range(min_spawn_pickupableitem_radius,max_spawn_pickupableitem_radius)
+		var spawn_angle = rand_range( 0, TAU )
+		var pickupable_item = pickupableitem_object.instance()
+		add_child(pickupable_item)
+		pickupable_item.global_position = globals.center.global_position + Vector2(spawn_radius, 0).rotated(spawn_angle)
 	pass
+
+
+func _on_endgame_timer_timeout():
+	var explo = preload(\"res://Nodes/big_explosion.tscn\").instance()
+	add_child(explo)
+	explo.rotation=rand_range(0,2*PI)
+	explo.scale*=rand_range(0.5,1.5)
+	explo.global_position=Vector2(1024,1024)+Vector2(rand_range(-300,300),rand_range(-300,300))
+	pass # Replace with function body.
 "
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -161,6 +183,7 @@ current = true
 self_modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 1015.24, 1046.43 )
 scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 11 )
 
 [node name="core3" type="Sprite" parent="core"]
 modulate = Color( 1, 1, 1, 0.666984 )
@@ -190,4 +213,8 @@ autoplay = "New Anim"
 visible = false
 shape = SubResource( 8 )
 
+[node name="endgame_timer" type="Timer" parent="."]
+wait_time = 0.014
+
 [connection signal="area_entered" from="core" to="core" method="_on_core_area_entered"]
+[connection signal="timeout" from="endgame_timer" to="." method="_on_endgame_timer_timeout"]
