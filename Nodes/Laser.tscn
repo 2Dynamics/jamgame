@@ -7,8 +7,8 @@
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource( 1 )
-dmg = 10000
-dmg_radius = 60
+dmg = 8000
+dmg_radius = 40
 
 [node name="Particles2D" type="Particles2D" parent="."]
 
