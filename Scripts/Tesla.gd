@@ -4,11 +4,9 @@ class_name Tesla
 onready var sprite = $Sprite
 
 func _physics_process(delta):
-#	$Sprite.rotation = -rotation
 	$Particles2D.rotation = - rotation
 	$explosion.rotation = - rotation
-	
-		
+
 func on_map_hit():
 	$Player.play("boom")
 	$Particles2D.process_material.set("direction", -velocity)

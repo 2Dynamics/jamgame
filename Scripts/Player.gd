@@ -5,6 +5,7 @@ export var player: int
 
 var laser_scene = load("res://Nodes/Laser.tscn")
 var rocket_scene = load("res://Nodes/Rocket.tscn")
+var heal_rocket_scene = load("res://Nodes/HealRocket.tscn")
 
 var center: Node2D
 var velocity: Vector2
@@ -72,13 +73,19 @@ func _physics_process(delta: float) -> void:
 			aim.global_rotation = (current_mouse_pos-aim.global_position).angle()+PI*0.5
 		
 	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
-#		var bullet = laser_scene.instance()
-		var bullet = rocket_scene.instance()
-		bullet.shooter_id=player
-		bullet.global_position=aim.global_position
-		bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-		
-		get_parent().add_child(bullet)
+		if reparable_time <= 0:
+#			var bullet = laser_scene.instance()
+			var bullet = rocket_scene.instance()
+			bullet.shooter_id=player
+			bullet.global_position=aim.global_position
+			bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
+			get_parent().add_child(bullet)
+		else:
+			var bullet = heal_rocket_scene.instance()
+			bullet.shooter_id=player
+			bullet.global_position=aim.global_position
+			bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
+			get_parent().add_child(bullet)
 
 	if stun_time > 0:
 		stun_time -= delta
@@ -86,7 +93,12 @@ func _physics_process(delta: float) -> void:
 			$AnimationPlayer.stop()
 			sprite.modulate=color
 			stun_time = 0
-		
+
+	if reparable_time > 0:
+		reparable_time -= delta
+		if reparable_time < 0:
+			reparable_time = 0
+
 	last_mouse_pos=get_global_mouse_position()
 
 func action(action: String):

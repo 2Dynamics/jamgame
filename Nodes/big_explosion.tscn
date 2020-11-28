@@ -36,10 +36,11 @@ tracks/1/keys = {
 } ]
 }
 
-[node name="core4" type="Sprite"]
+[node name="core5" type="Sprite"]
+modulate = Color( 6.87059, 3.64314, 3.89804, 0.427451 )
 material = SubResource( 1 )
-position = Vector2( 1128.6, 663.569 )
-scale = Vector2( 2, 2.57517 )
+position = Vector2( 1294.39, 1028.5 )
+scale = Vector2( 7.116, 6.783 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 4
