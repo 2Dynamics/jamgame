@@ -20,7 +20,7 @@ onready var aim = $aim
 onready var sprite = $Sprite
 
 func _ready() -> void:
-	modulate=color
+	sprite.modulate=color
 	for wheel in sprite.get_children():
 		wheel_points.append(wheel.position)
 var last_mouse_pos:Vector2
@@ -84,7 +84,7 @@ func _physics_process(delta: float) -> void:
 		stun_time -= delta
 		if stun_time < 0:
 			$AnimationPlayer.stop()
-			modulate=color
+			sprite.modulate=color
 			stun_time = 0
 		
 	last_mouse_pos=get_global_mouse_position()
