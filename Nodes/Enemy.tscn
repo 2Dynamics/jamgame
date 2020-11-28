@@ -1,8 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://sprite/missile_boat.png" type="Texture" id=2]
 [ext_resource path="res://sprite/explosion2.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 17, 16 )
 
 [sub_resource type="Animation" id=1]
 resource_name = "boom"
@@ -109,12 +112,15 @@ color_ramp = SubResource( 3 )
 hue_variation = -0.1
 hue_variation_random = 1.0
 
-[node name="Enemy" type="Node2D" groups=[
+[node name="Enemy" type="Area2D" groups=[
 "enemies",
 ]]
 script = ExtResource( 1 )
 spawn_distance = 2000.0
 orbit_distance = 900.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 9 )
 
 [node name="ufo" type="Sprite" parent="."]
 texture = ExtResource( 2 )

@@ -13,6 +13,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if target:
+		if not is_instance_valid(target):
+			target = null
+			return
+		
 		velocity = Vector2.RIGHT.rotated(lerp_angle(velocity.angle(), target.global_position.angle_to_point(global_position), 0.1)) * velocity.length()
 
 func on_hit():
