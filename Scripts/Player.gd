@@ -28,9 +28,7 @@ func _physics_process(delta: float) -> void:
 	
 	position += velocity * delta
 	
-	if(Input.is_action_just_pressed("ui_accept")):
-		globals.draw_explosion(get_global_mouse_position(),128,8555)
-		
+	
 		
 	var deadzone = 0.5
 	var controllerangle = Vector2.ZERO

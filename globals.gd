@@ -3,7 +3,7 @@ extends Node2D
 
 
 func draw_explosion(position: Vector2, radius: float, damage: float):
-	radius = map.update_grid_penetrating_explosive_damage_circle(position, radius, damage, 0.5)
+	radius = map.update_grid_penetrating_explosive_damage_circle(position, radius, damage, 0.3)
 	
 	var x := clamp(position.x - radius, 0, map.get_texture().get_width())
 	var y := clamp(position.y - radius, 0, map.get_texture().get_height())
