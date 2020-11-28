@@ -31,7 +31,7 @@ shader_param/terrain_texture_mix = ExtResource( 4 )
 
 [sub_resource type="MaterialData" id=2]
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Camera2D
 
 var players: Array
@@ -58,16 +58,16 @@ func _physics_process(delta: float) -> void:
 	zoom = Vector2.ONE * (1 + z)
 "
 
-[sub_resource type="CanvasItemMaterial" id=3]
-blend_mode = 1
-
 [sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 1
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[sub_resource type="Animation" id=7]
 length = 10.0
 loop = true
 tracks/0/type = "value"
@@ -107,7 +107,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id=8]
 radius = 92.2693
 
 [node name="Node2D" type="Node2D"]
@@ -168,7 +168,7 @@ script = ExtResource( 9 )
 position = Vector2( 1024, 1038 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
-script = SubResource( 8 )
+script = SubResource( 3 )
 
 [node name="core" type="Area2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -178,31 +178,31 @@ script = ExtResource( 11 )
 
 [node name="core3" type="Sprite" parent="core"]
 modulate = Color( 1, 1, 1, 0.666984 )
-material = SubResource( 3 )
+material = SubResource( 4 )
 scale = Vector2( 1.241, 1.266 )
 texture = ExtResource( 9 )
 
 [node name="core2" type="Sprite" parent="core"]
 modulate = Color( 1, 0.0705882, 0, 1 )
-material = SubResource( 4 )
+material = SubResource( 5 )
 rotation = 4.87457
 scale = Vector2( 0.807, 0.754 )
 texture = ExtResource( 9 )
 
 [node name="core" type="Sprite" parent="core"]
 self_modulate = Color( 4.62, 0, 9.25, 0.5 )
-material = SubResource( 5 )
+material = SubResource( 6 )
 rotation = 1.40862
 scale = Vector2( 0.786, 0.851 )
 texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="core"]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 6 )
+"anims/New Anim" = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="core"]
 visible = false
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="endgame_timer" type="Timer" parent="."]
 wait_time = 0.014
