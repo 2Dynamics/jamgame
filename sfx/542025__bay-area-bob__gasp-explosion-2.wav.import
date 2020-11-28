@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/542025__bay-area-bob__gasp-explosion-2.wav-e403ac6485000648c1c87a78d58da93e.sample"
+
+[deps]
+
+source_file="res://sfx/542025__bay-area-bob__gasp-explosion-2.wav"
+dest_files=[ "res://.import/542025__bay-area-bob__gasp-explosion-2.wav-e403ac6485000648c1c87a78d58da93e.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,13 +1,24 @@
 extends Bullet
 class_name Tesla
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+onready var sprite = $Sprite
 
-func destroy():
-	$Player.play("boom")
-	$Particles2D2.process_material.set("direction", -velocity)
+func _physics_process(delta):
+#	$Sprite.rotation = -rotation
+	$Particles2D.rotation = - rotation
+	$explosion.rotation = - rotation
 	
+		
+func on_map_hit():
+	$Player.play("boom")
+	$Particles2D.process_material.set("direction", -velocity)
+	globals.draw_explosion(global_position, dmg_radius, dmg)
+	velocity_damping *= 1.5
+#	dmg_radius *= 1.5
+	dmg *= 1.1
+	
+func on_hit():
+	$Player.play("boom")
+
 func clear():
 	queue_free()

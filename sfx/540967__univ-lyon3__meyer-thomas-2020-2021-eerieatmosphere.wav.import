@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/540967__univ-lyon3__meyer-thomas-2020-2021-eerieatmosphere.wav-0e058dd87c427ad21d1ecc41d9ccbf0c.sample"
+
+[deps]
+
+source_file="res://sfx/540967__univ-lyon3__meyer-thomas-2020-2021-eerieatmosphere.wav"
+dest_files=[ "res://.import/540967__univ-lyon3__meyer-thomas-2020-2021-eerieatmosphere.wav-0e058dd87c427ad21d1ecc41d9ccbf0c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

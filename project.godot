@@ -28,12 +28,24 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Player.gd"
+}, {
+"base": "Bullet",
+"class": "Tesla",
+"language": "GDScript",
+"path": "res://Scripts/Tesla.gd"
+}, {
+"base": "Node2D",
+"class": "TeslaSpawner",
+"language": "GDScript",
+"path": "res://Scripts/TeslaSpawner.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
 "Enemy": "",
 "PickupableItem": "",
-"Player": ""
+"Player": "",
+"Tesla": "",
+"TeslaSpawner": ""
 }
 
 [application]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/528771__itsthatroboguy__sci-fi-energy-gun.wav-c8e2aa674adce5804db1d7477ce22328.sample"
+
+[deps]
+
+source_file="res://sfx/528771__itsthatroboguy__sci-fi-energy-gun.wav"
+dest_files=[ "res://.import/528771__itsthatroboguy__sci-fi-energy-gun.wav-c8e2aa674adce5804db1d7477ce22328.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
