@@ -111,12 +111,13 @@ hue_variation_random = 1.0
 
 [node name="Enemy" type="Node2D"]
 script = ExtResource( 1 )
+spawn_distance = 2000.0
+orbit_distance = 900.0
 
 [node name="ufo" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
-autostart = true
 
 [node name="Player" type="AnimationPlayer" parent="."]
 anims/boom = SubResource( 1 )
