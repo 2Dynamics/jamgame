@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 size = 100
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=3]
 size = 30
 font_data = ExtResource( 2 )
 
@@ -61,7 +61,7 @@ margin_left = 26.4364
 margin_top = 20.231
 margin_right = 207.436
 margin_bottom = 54.231
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 3 )
 text = "HIGHSCORE 0"
 __meta__ = {
 "_edit_use_anchors_": false

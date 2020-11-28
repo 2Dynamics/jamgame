@@ -32,7 +32,7 @@ func on_map_hit():
 
 func _on_Bullet_area_entered(area):
 	if area is Player:
-		if shooter_id != area.player:
+		if shooter_id < 0 and shooter_id>3:
 			area.setStun()
 			on_hit()
 	elif area.is_in_group("enemies"):

@@ -69,5 +69,5 @@ func _on_endgame_timer_timeout():
 		globals.disconnect("score_changed", self, "update_score")
 	
 	endgame += 1
-	if endgame >= 1000:
+	if endgame >= 400:
 		get_tree().change_scene("res://Title.tscn")
