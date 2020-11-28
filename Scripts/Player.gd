@@ -8,6 +8,8 @@ var rocket_scene = load("res://Nodes/Rocket.tscn")
 var heal_rocket_scene = load("res://Nodes/HealRocket.tscn")
 var fat_laser_scene = load("res://Nodes/FatLaser.tscn")
 var fire_scene = load("res://Nodes/Fire.tscn")
+var laser_rocket_scene = load("res://Nodes/LaserRocket.tscn")
+var homing_rocket_scene = load("res://Nodes/HomingRocket.tscn")
 
 var center: Node2D
 var velocity: Vector2
@@ -78,6 +80,7 @@ func _physics_process(delta: float) -> void:
 		match weapon:
 			-1:
 				var bullet = laser_scene.instance()
+#				var bullet = homing_rocket_scene.instance() #debug
 				bullet.shooter_id=player
 				bullet.global_position=aim.global_position
 				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
@@ -102,6 +105,18 @@ func _physics_process(delta: float) -> void:
 				get_parent().add_child(bullet)
 			3:
 				var bullet = fire_scene.instance()
+				bullet.shooter_id=player
+				bullet.global_position=aim.global_position
+				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
+				get_parent().add_child(bullet)
+			4:
+				var bullet = laser_rocket_scene.instance()
+				bullet.shooter_id=player
+				bullet.global_position=aim.global_position
+				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
+				get_parent().add_child(bullet)
+			5:
+				var bullet = homing_rocket_scene.instance()
 				bullet.shooter_id=player
 				bullet.global_position=aim.global_position
 				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)

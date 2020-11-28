@@ -17,7 +17,7 @@ script/source = "extends Node2D
 
 var pickupableitem_object := load(\"res://Nodes/PickupableItem.tscn\")
 
-var spawn_pickupable_time = 20
+var spawn_pickupable_time = 5
 var spawn_pickupable_timer = 0
 
 var min_spawn_pickupableitem_radius = 80

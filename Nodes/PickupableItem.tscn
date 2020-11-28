@@ -42,4 +42,16 @@ texture = ExtResource( 5 )
 vframes = 3
 frame = 2
 
+[node name="Sprite5" type="Sprite" parent="Icons"]
+visible = false
+modulate = Color( 1, 0, 0, 1 )
+texture = ExtResource( 3 )
+vframes = 3
+
+[node name="Sprite6" type="Sprite" parent="Icons"]
+visible = false
+modulate = Color( 0.686275, 0, 1, 1 )
+texture = ExtResource( 3 )
+vframes = 3
+
 [connection signal="area_entered" from="." to="." method="_on_PickupableItem_area_entered"]

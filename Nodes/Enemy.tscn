@@ -109,7 +109,9 @@ color_ramp = SubResource( 3 )
 hue_variation = -0.1
 hue_variation_random = 1.0
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="Node2D" groups=[
+"enemies",
+]]
 script = ExtResource( 1 )
 spawn_distance = 2000.0
 orbit_distance = 900.0
