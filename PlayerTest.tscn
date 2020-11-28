@@ -214,7 +214,7 @@ visible = false
 shape = SubResource( 8 )
 
 [node name="endgame_timer" type="Timer" parent="."]
-wait_time = 0.067
+wait_time = 0.014
 
 [connection signal="area_entered" from="core" to="core" method="_on_core_area_entered"]
 [connection signal="timeout" from="endgame_timer" to="." method="_on_endgame_timer_timeout"]
