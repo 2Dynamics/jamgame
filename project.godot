@@ -46,7 +46,6 @@ _global_script_class_icons={
 
 config/name="Mars Defense"
 run/main_scene="res://PlayerTest.tscn"
-boot_splash/image="res://marsdefense-splash2.png"
 
 [autoload]
 

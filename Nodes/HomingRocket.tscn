@@ -42,6 +42,8 @@ tracks/0/keys = {
 [node name="Rocket" type="Area2D"]
 modulate = Color( 0.686275, 0, 1, 1 )
 script = ExtResource( 1 )
+dmg = 20000
+dmg_radius = 160
 gravity_scale = 0.5
 
 [node name="Particles2D" type="Particles2D" parent="."]
