@@ -6,9 +6,17 @@ export var dmg_radius := 0
 export var velocity_damping := 0.002
 export var gravity_scale = 1.0
 
-var shooter_id = -1
+var shooter_id = -1 setget set_shooter_id, get_shooter_id
 var velocity := Vector2.ZERO
 
+func set_shooter_id(id):
+	print(id)
+	shooter_id=id
+	if shooter_id < 0 or shooter_id>3:
+		modulate=Color(1,0,0)
+	pass
+func get_shooter_id():
+	return shooter_id
 func _enter_tree():
 	set_meta("bullet", true)
 
@@ -32,7 +40,7 @@ func on_map_hit():
 
 func _on_Bullet_area_entered(area):
 	if area is Player:
-		if shooter_id < 0 and shooter_id>3:
+		if shooter_id < 0 or shooter_id>3:
 			area.setStun()
 			on_hit()
 	elif area.is_in_group("enemies"):
