@@ -33,6 +33,7 @@ func _on_Bullet_area_entered(area):
 			area.setStun()
 			on_hit()
 	elif area.is_in_group("enemies"):
-		area.clear()
-		on_hit()
+		if shooter_id != area.eneny_id:
+			area.clear()
+			on_hit()
 		

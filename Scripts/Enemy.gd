@@ -23,6 +23,8 @@ var orbit_angle := 0.0
 var orbit_direction := 1 
 var speed = 0.1
 
+const eneny_id = 999
+
 var is_alive = true
 
 onready var sprite = $ufo
@@ -71,6 +73,7 @@ func shoot():
 	new_bullet.position = position
 	new_bullet.dmg = 20000
 	new_bullet.dmg_radius = 100
+	new_bullet.shooter_id = eneny_id
 	
 
 func damege():
