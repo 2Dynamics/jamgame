@@ -1,12 +1,13 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scripts/Rocket.gd" type="Script" id=1]
-[ext_resource path="res://sprite/rocket.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/Laser.gd" type="Script" id=1]
+[ext_resource path="res://sprite/fire.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 5.0
 
 [sub_resource type="Animation" id=2]
-resource_name = "Rakietowanie"
+resource_name = "Ogniowanie"
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -22,22 +23,30 @@ tracks/0/keys = {
 "values": [ 0, 1, 2 ]
 }
 
-[node name="Rocket" type="Area2D"]
+[node name="Fire" type="Area2D"]
 script = ExtResource( 1 )
-dmg = 20000
-dmg_radius = 160
+dmg = 8000
+dmg_radius = 40
+gravity_scale = 0.0
 
 [node name="Particles2D" type="Particles2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2.125, 0 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Rakietowanie"
-anims/Rakietowanie = SubResource( 2 )
+autoplay = "Ogniowanie"
+anims/Ogniowanie = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 3
 
 [connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
