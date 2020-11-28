@@ -6,6 +6,7 @@ var center: Node2D
 var velocity: Vector2
 var prev_move: Vector2
 
+var last_mouse_pos:Vector2
 onready var aim= $Sprite/aim
 
 func _physics_process(delta: float) -> void:
@@ -39,6 +40,11 @@ func _physics_process(delta: float) -> void:
 
 		controllerangle = Vector2(xAxisRL, yAxisUD).angle()
 		aim.global_rotation = controllerangle+PI*0.5
+	
+	if player==0:
+		var current_mouse_pos=get_global_mouse_position()
+		if last_mouse_pos!=current_mouse_pos:
+			aim.global_rotation = (current_mouse_pos-aim.global_position).angle()+PI*0.5
 		
 	if Input.is_action_just_pressed(action("shoot")):
 		var bullet=bullet_scene.instance()
@@ -48,6 +54,8 @@ func _physics_process(delta: float) -> void:
 		bullet.dmg_radius=60
 		
 		get_parent().add_child(bullet)
+		
+	last_mouse_pos=get_global_mouse_position()
 	
 
 func action(action: String):

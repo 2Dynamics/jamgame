@@ -18,3 +18,6 @@ scale = Vector2( 0.147, 1 )
 [node name="aim2" type="Sprite" parent="Sprite/aim"]
 position = Vector2( 0, -50 )
 texture = ExtResource( 1 )
+
+[node name="lufa" type="Node2D" parent="Sprite/aim/aim2"]
+position = Vector2( -3.40136, -29 )

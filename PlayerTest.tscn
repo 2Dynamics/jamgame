@@ -37,17 +37,16 @@ shader_param/terrain_texture_mix = ExtResource( 4 )
 
 [sub_resource type="MaterialData" id=3]
 
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
 [sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id=6]
 blend_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=7]
-blend_mode = 1
-
-[sub_resource type="Animation" id=4]
-resource_name = "New Anim"
+[sub_resource type="Animation" id=7]
 length = 10.0
 loop = true
 tracks/0/type = "value"
@@ -146,27 +145,27 @@ script = ExtResource( 10 )
 
 [node name="core3" type="Sprite" parent="core"]
 modulate = Color( 1, 1, 1, 0.666984 )
-material = SubResource( 5 )
+material = SubResource( 4 )
 scale = Vector2( 1.241, 1.266 )
 texture = ExtResource( 9 )
 
 [node name="core2" type="Sprite" parent="core"]
 modulate = Color( 1, 0.0705882, 0, 1 )
-material = SubResource( 6 )
+material = SubResource( 5 )
 rotation = 4.87457
 scale = Vector2( 0.807, 0.754 )
 texture = ExtResource( 9 )
 
 [node name="core" type="Sprite" parent="core"]
 self_modulate = Color( 4.62, 0, 9.25, 0.5 )
-material = SubResource( 7 )
+material = SubResource( 6 )
 rotation = 1.40862
 scale = Vector2( 0.786, 0.851 )
 texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="core"]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 4 )
+"anims/New Anim" = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="core"]
 visible = false
