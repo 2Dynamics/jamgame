@@ -21,12 +21,9 @@ func spawn():
 	
 	new_tesla.velocity = -direction.normalized() * initial_speed
 	new_tesla.position = spawn_point
-	new_tesla.dmg = 1000
+	new_tesla.dmg = 10000
 	new_tesla.dmg_radius = 50
-	print ("new_tesla")
-	print (new_tesla.position)
-	print (new_tesla.velocity)
-	
+
 	
 func _on_Timer_timeout():
 	if $Timer.wait_time > 2.0:
