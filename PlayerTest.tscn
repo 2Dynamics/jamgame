@@ -14,7 +14,7 @@
 [ext_resource path="res://Scripts/PlayerTest.gd" type="Script" id=12]
 [ext_resource path="res://Bauhaus 93 Regular.ttf" type="DynamicFontData" id=13]
 
-[sub_resource type="ShaderMaterial" id=9]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
 shader_param/global_transform = null
 shader_param/cutoff = 0.99
@@ -30,9 +30,9 @@ shader_param/noise_tiled = ExtResource( 3 )
 shader_param/random_noise = ExtResource( 5 )
 shader_param/terrain_texture_mix = ExtResource( 4 )
 
-[sub_resource type="MaterialData" id=10]
+[sub_resource type="MaterialData" id=2]
 
-[sub_resource type="GDScript" id=8]
+[sub_resource type="GDScript" id=3]
 script/source = "extends Camera2D
 
 var players: Array
@@ -59,16 +59,16 @@ func _physics_process(delta: float) -> void:
 	zoom = Vector2.ONE * (1 + z)
 "
 
-[sub_resource type="CanvasItemMaterial" id=11]
+[sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=12]
+[sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=13]
+[sub_resource type="CanvasItemMaterial" id=6]
 blend_mode = 1
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=7]
 length = 10.0
 loop = true
 tracks/0/type = "value"
@@ -108,10 +108,10 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=15]
+[sub_resource type="CircleShape2D" id=8]
 radius = 92.2693
 
-[sub_resource type="DynamicFont" id=16]
+[sub_resource type="DynamicFont" id=9]
 size = 30
 font_data = ExtResource( 13 )
 
@@ -132,8 +132,8 @@ __meta__ = {
 }
 
 [node name="DynamicGridMap" type="DynamicGridMap" parent="."]
-material = SubResource( 9 )
-material_data = SubResource( 10 )
+material = SubResource( 1 )
+material_data = SubResource( 2 )
 texture_path = "./full.png"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -173,7 +173,7 @@ script = ExtResource( 9 )
 position = Vector2( 1024, 1038 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
-script = SubResource( 8 )
+script = SubResource( 3 )
 
 [node name="core" type="Area2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -183,31 +183,31 @@ script = ExtResource( 11 )
 
 [node name="core3" type="Sprite" parent="core"]
 modulate = Color( 1, 1, 1, 0.666984 )
-material = SubResource( 11 )
+material = SubResource( 4 )
 scale = Vector2( 1.241, 1.266 )
 texture = ExtResource( 9 )
 
 [node name="core2" type="Sprite" parent="core"]
 modulate = Color( 1, 0.0705882, 0, 1 )
-material = SubResource( 12 )
+material = SubResource( 5 )
 rotation = 4.87457
 scale = Vector2( 0.807, 0.754 )
 texture = ExtResource( 9 )
 
 [node name="core" type="Sprite" parent="core"]
 self_modulate = Color( 4.62, 0, 9.25, 0.5 )
-material = SubResource( 13 )
+material = SubResource( 6 )
 rotation = 1.40862
 scale = Vector2( 0.786, 0.851 )
 texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="core"]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 14 )
+"anims/New Anim" = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="core"]
 visible = false
-shape = SubResource( 15 )
+shape = SubResource( 8 )
 
 [node name="endgame_timer" type="Timer" parent="."]
 wait_time = 0.014
@@ -219,7 +219,7 @@ margin_left = 30.0
 margin_top = 30.0
 margin_right = 83.0
 margin_bottom = 44.0
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 9 )
 text = "SCORE 0"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -230,7 +230,7 @@ margin_left = 30.0
 margin_top = 71.0122
 margin_right = 145.0
 margin_bottom = 105.012
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 9 )
 text = "HIGHSCORE 0"
 __meta__ = {
 "_edit_use_anchors_": false
