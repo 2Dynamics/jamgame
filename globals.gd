@@ -15,7 +15,7 @@ func draw_explosion(position: Vector2, radius: float, damage: float):
 
 
 func draw_heal(position: Vector2, radius: float, heal: float):
-	map.update_grid_damage_circle_hardness(position, radius, -heal, 1)
+	map.update_grid_damage_circle_hardness(position, radius, -heal, 10)
 	
 	var x := clamp(position.x - radius, 0, map.get_texture().get_width())
 	var y := clamp(position.y - radius, 0, map.get_texture().get_height())
