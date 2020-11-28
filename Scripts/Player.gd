@@ -143,7 +143,6 @@ func process_collisions( delta ):
 		colider_position = global_position + collider_points[i].rotated(rotation)
 		var raycast = globals.map.raycast(colider_position, colider_position + collider_directions[i].rotated(rotation) * 5)
 		if raycast and raycast.get("collision", true):
-			print (raycast.pixel_number)
 			force = 5.0 / max( 1.0, raycast.pixel_number )
 			total_force -= collider_directions[i].rotated(rotation) * force
 	velocity += total_force
