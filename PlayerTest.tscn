@@ -32,7 +32,7 @@ shader_param/terrain_texture_mix = ExtResource( 4 )
 
 [sub_resource type="MaterialData" id=10]
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=8]
 script/source = "extends Camera2D
 
 var players: Array
@@ -173,7 +173,7 @@ script = ExtResource( 9 )
 position = Vector2( 1024, 1038 )
 current = true
 zoom = Vector2( 0.75, 0.75 )
-script = SubResource( 3 )
+script = SubResource( 8 )
 
 [node name="core" type="Area2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
