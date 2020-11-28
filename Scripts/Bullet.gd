@@ -10,11 +10,10 @@ var shooter_id = -1 setget set_shooter_id, get_shooter_id
 var velocity := Vector2.ZERO
 
 func set_shooter_id(id):
-	print(id)
 	shooter_id=id
 	if shooter_id < 0 or shooter_id>3:
 		modulate=Color(1,0,0)
-	pass
+
 func get_shooter_id():
 	return shooter_id
 func _enter_tree():
