@@ -9,7 +9,15 @@ var velocity: Vector2
 var prev_move: Vector2
 var stun_time = 0
 var reparable_time = 0
+var wheel_points: Array
 
+
+onready var aim = $aim
+onready var sprite = $Sprite
+
+func _ready() -> void:
+	for wheel in sprite.get_children():
+		wheel_points.append(wheel.position)
 var last_mouse_pos:Vector2
 onready var aim= $Sprite/aim
 
@@ -25,6 +33,14 @@ func _physics_process(delta: float) -> void:
 	velocity += grav * 1000 * delta
 	velocity += move * 1200 * delta
 	velocity *= 0.95
+	
+	for i in 3:
+		var wheel: Node2D = sprite.get_child(i)
+		var high_point = wheel_points[i].rotated(rotation) - grav * 30
+		var raycast = globals.map.raycast(global_position + high_point, global_position + high_point + grav * 60)
+		
+		if raycast and raycast.get("collision", true):
+			wheel.position.y = wheel_points[i].y - 15 + raycast.pixel_number
 	
 	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
 	if raycast and raycast.get("collision", true):
