@@ -6,16 +6,23 @@ export var player: int
 var laser_scene = load("res://Nodes/Laser.tscn")
 var rocket_scene = load("res://Nodes/Rocket.tscn")
 var heal_rocket_scene = load("res://Nodes/HealRocket.tscn")
+var fat_laser_scene = load("res://Nodes/FatLaser.tscn")
+var fire_scene = load("res://Nodes/Fire.tscn")
+var laser_rocket_scene = load("res://Nodes/LaserRocket.tscn")
+var homing_rocket_scene = load("res://Nodes/HomingRocket.tscn")
+var long_laser_scene = load("res://Nodes/LongLaser.tscn")
 
 var center: Node2D
 var velocity: Vector2
 var prev_move: Vector2
 var stun_time = 0
 var reparable_time = 0
+var weapon = -1
 var wheel_points: Array
 
 export var color:Color
 
+enum {LASER = -1, ROCKET, HEALING_ROCKET, FAT_LASER, FIRE, LASER_ROCKET, HOMING_ROCKET, LONG_LASER}
 
 onready var aim = $aim
 onready var sprite = $Sprite
@@ -62,7 +69,6 @@ func _physics_process(delta: float) -> void:
 	var yAxisUD = Input.get_joy_axis(player ,JOY_AXIS_3)
 
 	if abs(xAxisRL) > deadzone || abs(yAxisUD) > deadzone:
-
 		controllerangle = Vector2(xAxisRL, yAxisUD).angle()
 		aim.global_rotation = controllerangle+PI*0.5
 
@@ -73,19 +79,14 @@ func _physics_process(delta: float) -> void:
 			aim.global_rotation = (current_mouse_pos-aim.global_position).angle()+PI*0.5
 		
 	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
-		if reparable_time <= 0:
-#			var bullet = laser_scene.instance()
-			var bullet = rocket_scene.instance()
-			bullet.shooter_id=player
-			bullet.global_position=aim.global_position
-			bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-			get_parent().add_child(bullet)
-		else:
-			var bullet = heal_rocket_scene.instance()
-			bullet.shooter_id=player
-			bullet.global_position=aim.global_position
-			bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-			get_parent().add_child(bullet)
+		var bullet = [laser_scene, rocket_scene, heal_rocket_scene,
+			fat_laser_scene, fire_scene, laser_rocket_scene, homing_rocket_scene,
+			long_laser_scene][weapon + 1]
+#		bullet = homing_rocket_scene #debug
+		bullet = shoot_bullet(bullet)
+		match weapon:
+			HOMING_ROCKET:
+				bullet.velocity *= 2
 
 	if stun_time > 0:
 		stun_time -= delta
@@ -94,12 +95,19 @@ func _physics_process(delta: float) -> void:
 			sprite.modulate=color
 			stun_time = 0
 
-	if reparable_time > 0:
-		reparable_time -= delta
-		if reparable_time < 0:
-			reparable_time = 0
+	reparable_time -= delta
+	if reparable_time <= 0:
+		weapon = -1
 
 	last_mouse_pos=get_global_mouse_position()
+
+func shoot_bullet(b):
+	var bullet = b.instance()
+	bullet.shooter_id=player
+	bullet.global_position=aim.global_position
+	bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
+	get_parent().add_child(bullet)
+	return bullet
 
 func action(action: String):
 	return str("p", player, "_", action)
@@ -109,5 +117,6 @@ func setStun():
 	stun_time = 4
 	pass
 
-func setReparableTime():
+func setReparableTime(w: int):
 	reparable_time = 10
+	weapon = w

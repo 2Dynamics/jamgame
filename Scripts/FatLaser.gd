@@ -14,5 +14,6 @@ func _on_Timer_timeout() -> void:
 		var laser = load("res://Nodes/Laser.tscn").instance()
 		laser.position = position
 		laser.velocity = velocity.rotated(-DANGLE + i * DANGLE)
+		laser.shooter_id = shooter_id
 		get_parent().add_child(laser)
 	queue_free()

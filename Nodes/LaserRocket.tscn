@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scripts/Rocket.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/LaserRocket.gd" type="Script" id=1]
 [ext_resource path="res://sprite/rocket.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
@@ -40,6 +40,7 @@ tracks/0/keys = {
 }
 
 [node name="Rocket" type="Area2D"]
+modulate = Color( 1, 0, 0, 1 )
 script = ExtResource( 1 )
 dmg = 20000
 dmg_radius = 160
@@ -61,4 +62,9 @@ anims/Rakietowanie = SubResource( 5 )
 texture = ExtResource( 2 )
 vframes = 3
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+autostart = true
+
 [connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

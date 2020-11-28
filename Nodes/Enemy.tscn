@@ -1,11 +1,13 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://sprite/missile_boat.png" type="Texture" id=2]
 [ext_resource path="res://sprite/explosion2.png" type="Texture" id=3]
 
-[sub_resource type="Animation" id=1]
-resource_name = "boom"
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 17, 16 )
+
+[sub_resource type="Animation" id=2]
 length = 0.9
 step = 0.05
 tracks/0/type = "value"
@@ -71,29 +73,29 @@ tracks/4/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Gradient" id=2]
+[sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.571865, 1 )
 colors = PoolColorArray( 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0 )
 
-[sub_resource type="GradientTexture" id=3]
-gradient = SubResource( 2 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 width = 256
 
-[sub_resource type="Curve" id=4]
+[sub_resource type="Curve" id=5]
 _data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
-[sub_resource type="CurveTexture" id=5]
-curve = SubResource( 4 )
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=8]
+[sub_resource type="ParticlesMaterial" id=9]
 lifetime_randomness = 0.5
-trail_size_modifier = SubResource( 7 )
+trail_size_modifier = SubResource( 8 )
 flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 98, 0 )
@@ -104,15 +106,20 @@ orbit_velocity_random = 0.0
 angle = 720.0
 angle_random = 1.0
 scale = 10.0
-scale_curve = SubResource( 5 )
-color_ramp = SubResource( 3 )
+scale_curve = SubResource( 6 )
+color_ramp = SubResource( 4 )
 hue_variation = -0.1
 hue_variation_random = 1.0
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="Area2D" groups=[
+"enemies",
+]]
 script = ExtResource( 1 )
 spawn_distance = 2000.0
 orbit_distance = 900.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
 
 [node name="ufo" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -120,10 +127,9 @@ texture = ExtResource( 2 )
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Player" type="AnimationPlayer" parent="."]
-anims/boom = SubResource( 1 )
+anims/boom = SubResource( 2 )
 
 [node name="explosion" type="Sprite" parent="."]
-visible = false
 texture = ExtResource( 3 )
 hframes = 4
 vframes = 4
@@ -134,6 +140,6 @@ amount = 64
 lifetime = 1.8
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 8 )
+process_material = SubResource( 9 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
