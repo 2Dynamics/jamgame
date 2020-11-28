@@ -33,3 +33,5 @@ texture = ExtResource( 4 )
 [node name="Wheel3" type="Sprite" parent="Sprite"]
 position = Vector2( 22, 17 )
 texture = ExtResource( 4 )
+[node name="lufa" type="Node2D" parent="aim/aim2"]
+position = Vector2( -3.40136, -29 )
