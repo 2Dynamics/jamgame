@@ -53,7 +53,13 @@ func _physics_process(delta: float) -> void:
 	if stun_time <= 0:
 		move.x = int(Input.is_action_pressed(action("right"))) - int(Input.is_action_pressed(action("left")))
 		move.y = int(Input.is_action_pressed(action("down"))) - int(Input.is_action_pressed(action("up")))
-	
+		
+	if int(Input.is_action_pressed(action("up") ) ):
+		$ExhaustPlayer1.play("burn")
+	if int(Input.is_action_pressed(action("right") ) ):
+		$ExhaustPlayer2.play("burn")
+	if int(Input.is_action_pressed(action("left") ) ):
+		$ExhaustPlayer3.play("burn")
 	
 	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
 	if raycast and raycast.get("collision", true):
