@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/marsdefense-splash2.png-fa0a8ad02c90d395ed630791a25ed279.stex"
+path="res://.import/marsdefense-splash.png-b2c73b3c70ac3cb4a08b7e9ffa75103e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://marsdefense-splash2.png"
-dest_files=[ "res://.import/marsdefense-splash2.png-fa0a8ad02c90d395ed630791a25ed279.stex" ]
+source_file="res://marsdefense-splash.png"
+dest_files=[ "res://.import/marsdefense-splash.png-b2c73b3c70ac3cb4a08b7e9ffa75103e.stex" ]
 
 [params]
 
