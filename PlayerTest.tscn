@@ -1,4 +1,5 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
+
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://crack.png" type="Texture" id=2]
@@ -8,7 +9,9 @@
 [ext_resource path="res://Dyamic_grid_shader.shader" type="Shader" id=6]
 [ext_resource path="res://Nodes/Enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sprite/bg.png" type="Texture" id=8]
-[ext_resource path="res://Scripts/PickupableItem.gd" type="Script" id=9]
+[ext_resource path="res://sprite/core.png" type="Texture" id=9]
+[ext_resource path="res://core.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/PickupableItem.gd" type="Script" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -18,8 +21,6 @@ var spawn_pickupable_timer = 0
 
 func _ready() -> void:
 	globals.center = $Center
-	globals.gravity_center = $Center.position
-	globals.center_of_gravity = $Center.position
 	globals.map = $DynamicGridMap
 
 
@@ -50,11 +51,68 @@ shader_param/terrain_texture_mix = ExtResource( 4 )
 
 [sub_resource type="MaterialData" id=3]
 
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=5]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[sub_resource type="Animation" id=7]
+length = 10.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("core:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5.2, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0, 720.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("core2:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5.2, 10 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 360.0, 0.0, -360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("core3:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2, 3.01577, 4.02452, 5.43576, 5.99014, 6.98519, 7.75595, 8.58448, 9.25533, 9.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 92.2693
+
 [node name="Node2D" type="Node2D"]
 script = SubResource( 1 )
 
 [node name="bg" type="Sprite" parent="."]
-position = Vector2( 1036.22, 1063.57 )
+position = Vector2( 1036.93, 1063.57 )
+scale = Vector2( 1.215, 1.31 )
+texture = ExtResource( 8 )
+
+[node name="bg2" type="Sprite" parent="."]
+position = Vector2( 1036.93, 1063.57 )
 scale = Vector2( 1.215, 1.31 )
 texture = ExtResource( 8 )
 
@@ -96,3 +154,39 @@ script = ExtResource( 9 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1024, 1038 )
 current = true
+
+[node name="core" type="Area2D" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1015.24, 1046.43 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 10 )
+
+[node name="core3" type="Sprite" parent="core"]
+modulate = Color( 1, 1, 1, 0.666984 )
+material = SubResource( 4 )
+scale = Vector2( 1.241, 1.266 )
+texture = ExtResource( 9 )
+
+[node name="core2" type="Sprite" parent="core"]
+modulate = Color( 1, 0.0705882, 0, 1 )
+material = SubResource( 5 )
+rotation = 4.87457
+scale = Vector2( 0.807, 0.754 )
+texture = ExtResource( 9 )
+
+[node name="core" type="Sprite" parent="core"]
+self_modulate = Color( 4.62, 0, 9.25, 0.5 )
+material = SubResource( 6 )
+rotation = 1.40862
+scale = Vector2( 0.786, 0.851 )
+texture = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="core"]
+autoplay = "New Anim"
+"anims/New Anim" = SubResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="core"]
+visible = false
+shape = SubResource( 8 )
+
+[connection signal="area_entered" from="core" to="core" method="_on_core_area_entered"]

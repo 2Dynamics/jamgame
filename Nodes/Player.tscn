@@ -27,3 +27,7 @@ position = Vector2( -0.374573, -32.5882 )
 shape = SubResource( 1 )
 
 [connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+
+[node name="lufa" type="Node2D" parent="Sprite/aim/aim2"]
+position = Vector2( -3.40136, -29 )
+

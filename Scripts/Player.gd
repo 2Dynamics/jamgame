@@ -10,6 +10,7 @@ var prev_move: Vector2
 var stun_time = 0
 var reparable_time = 0
 
+var last_mouse_pos:Vector2
 onready var aim= $Sprite/aim
 
 func _physics_process(delta: float) -> void:
@@ -33,9 +34,7 @@ func _physics_process(delta: float) -> void:
 	
 	position += velocity * delta
 	
-	if(Input.is_action_just_pressed("ui_accept")):
-		globals.draw_explosion(get_global_mouse_position(),128,8555)
-		
+	
 		
 	var deadzone = 0.5
 	var controllerangle = Vector2.ZERO
@@ -47,6 +46,12 @@ func _physics_process(delta: float) -> void:
 		controllerangle = Vector2(xAxisRL, yAxisUD).angle()
 		aim.global_rotation = controllerangle+PI*0.5
 
+	
+	if player==0:
+		var current_mouse_pos=get_global_mouse_position()
+		if last_mouse_pos!=current_mouse_pos:
+			aim.global_rotation = (current_mouse_pos-aim.global_position).angle()+PI*0.5
+		
 	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
 		var bullet=bullet_scene.instance()
 		bullet.global_position=aim.global_position
@@ -60,6 +65,8 @@ func _physics_process(delta: float) -> void:
 		stun_time -= delta
 		if stun_time < 0:
 			stun_time = 0
+		
+	last_mouse_pos=get_global_mouse_position()
 
 func action(action: String):
 	return str("p", player, "_", action)
