@@ -2,10 +2,10 @@
 
 [ext_resource path="res://sprite/explosion2.png" type="Texture" id=1]
 
-[sub_resource type="CanvasItemMaterial" id=6]
+[sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=2]
 resource_name = "New Anim"
 length = 0.5
 loop = true
@@ -37,7 +37,7 @@ tracks/1/keys = {
 }
 
 [node name="core4" type="Sprite"]
-material = SubResource( 6 )
+material = SubResource( 1 )
 position = Vector2( 1128.6, 663.569 )
 scale = Vector2( 2, 2.57517 )
 texture = ExtResource( 1 )
@@ -46,4 +46,4 @@ vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 7 )
+"anims/New Anim" = SubResource( 2 )
