@@ -22,6 +22,7 @@ var wheel_points: Array
 
 export var color:Color
 
+enum {LASER = -1, ROCKET, HEALING_ROCKET, FAT_LASER, FIRE, LASER_ROCKET, HOMING_ROCKET, LONG_LASER}
 
 onready var aim = $aim
 onready var sprite = $Sprite
@@ -78,56 +79,14 @@ func _physics_process(delta: float) -> void:
 			aim.global_rotation = (current_mouse_pos-aim.global_position).angle()+PI*0.5
 		
 	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
+		var bullet = [laser_scene, rocket_scene, heal_rocket_scene,
+			fat_laser_scene, fire_scene, laser_rocket_scene, homing_rocket_scene,
+			long_laser_scene][weapon + 1]
+#		bullet = homing_rocket_scene #debug
+		bullet = shoot_bullet(bullet)
 		match weapon:
-			-1:
-#				var bullet = laser_scene.instance()
-				var bullet = long_laser_scene.instance() #debug
-				bullet.shooter_id=player
-				bullet.global_position=aim.global_position
-				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-				get_parent().add_child(bullet)
-			0:
-				var bullet = rocket_scene.instance()
-				bullet.shooter_id=player
-				bullet.global_position=aim.global_position
-				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-				get_parent().add_child(bullet)
-			1:
-				var bullet = heal_rocket_scene.instance()
-				bullet.shooter_id=player
-				bullet.global_position=aim.global_position
-				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-				get_parent().add_child(bullet)
-			2:
-				var bullet = fat_laser_scene.instance()
-				bullet.shooter_id=player
-				bullet.global_position=aim.global_position
-				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-				get_parent().add_child(bullet)
-			3:
-				var bullet = fire_scene.instance()
-				bullet.shooter_id=player
-				bullet.global_position=aim.global_position
-				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-				get_parent().add_child(bullet)
-			4:
-				var bullet = laser_rocket_scene.instance()
-				bullet.shooter_id=player
-				bullet.global_position=aim.global_position
-				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-				get_parent().add_child(bullet)
-			5:
-				var bullet = homing_rocket_scene.instance()
-				bullet.shooter_id=player
-				bullet.global_position=aim.global_position
-				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-				get_parent().add_child(bullet)
-			6:
-				var bullet = long_laser_scene.instance()
-				bullet.shooter_id=player
-				bullet.global_position=aim.global_position
-				bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-				get_parent().add_child(bullet)
+			HOMING_ROCKET:
+				bullet.velocity *= 2
 
 	if stun_time > 0:
 		stun_time -= delta
@@ -141,6 +100,14 @@ func _physics_process(delta: float) -> void:
 		weapon = -1
 
 	last_mouse_pos=get_global_mouse_position()
+
+func shoot_bullet(b):
+	var bullet = b.instance()
+	bullet.shooter_id=player
+	bullet.global_position=aim.global_position
+	bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
+	get_parent().add_child(bullet)
+	return bullet
 
 func action(action: String):
 	return str("p", player, "_", action)
