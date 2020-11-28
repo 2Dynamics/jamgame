@@ -14,21 +14,17 @@ func _physics_process(delta):
 	rotation = velocity.angle()
 
 	if collideWithMap():
+		on_hit()
 		on_map_hit()
 
 func collideWithMap() -> bool:
 	return globals.map.is_pixel_solid_v(global_position)
 
+func on_hit(): pass
 func on_map_hit(): pass
 
 func _on_Bullet_area_entered(area):
 	if area is Player:
 		if shooter_id != area.player:
 			area.setStun()
-			globals.draw_explosion(global_position, dmg_radius, dmg)
-			var expl=explosion_scene.instance()
-			get_parent().add_child(expl)
-			expl.global_position=global_position
-
-			
-			queue_free()
+			on_hit()
