@@ -32,3 +32,5 @@ var center: Node2D
 var map: DynamicGridMap
 
 var gravity_scale := 98.0
+var gravity_center :Vector2
+var center_of_gravity :Vector2
