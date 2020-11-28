@@ -10,7 +10,7 @@ var gravicy_accel_val := 98.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	center_of_gravity = globals.center.global_position
+	center_of_gravity = globals.gravity_center
 	pass # Replace with function body.
 
 func _physics_process(delta):
