@@ -46,5 +46,5 @@ func _on_endgame_timer_timeout():
 	explo.global_position=Vector2(1024,1024)+Vector2(rand_range(-300,300),rand_range(-300,300))
 	
 	endgame += 1
-	if endgame >= 100:
+	if endgame >= 1000:
 		get_tree().change_scene("res://Title.tscn")
