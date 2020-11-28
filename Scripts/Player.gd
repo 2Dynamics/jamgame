@@ -122,15 +122,15 @@ func process_suspension(delta, grav):
 #				torque += (up*force).cross(wheel.position)
 #			if i == 2:
 #				torque -= (up*force).cross(wheel.position)
-			velocity += up * force * 1.1
+			velocity += up * force * 0.1
 			is_on_ground = true
 		else:
 			wheel.position.y = wheel_points[i].y + 7
-	if torque:
+	if is_on_ground:
 #		rotation += torque * 0.01
 		rotation = lerp(rotation, rotation + torque * 0.01, 0.1)
 	else:
-		rotation = lerp(rotation, grav.angle() -PI/2.0, 0.1)
+		rotation = lerp_angle(rotation, grav.angle()-PI/2.0, 0.1)
 		
 	if collisions_count:
 		average_ray_length /= collisions_count
