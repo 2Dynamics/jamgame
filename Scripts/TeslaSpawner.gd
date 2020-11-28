@@ -21,7 +21,7 @@ func spawn():
 	
 	new_tesla.velocity = -direction.normalized() * initial_speed
 	new_tesla.position = spawn_point
-	new_tesla.dmg = 10000
+	new_tesla.dmg = 1000
 	new_tesla.dmg_radius = 50
 
 	
