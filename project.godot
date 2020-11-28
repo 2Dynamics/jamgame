@@ -35,6 +35,8 @@ globals="*res://globals.gd"
 
 [display]
 
+window/size/width=1920
+window/size/height=1280
 window/dpi/allow_hidpi=true
 
 [input]
@@ -121,5 +123,25 @@ p3_down={
 p3_left={
 "deadzone": 0.5,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":3,"axis":0,"axis_value":-1.0,"script":null)
+ ]
+}
+p0_shoot={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":7,"axis_value":1.0,"script":null)
+ ]
+}
+p1_shoot={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":1,"axis":7,"axis_value":1.0,"script":null)
+ ]
+}
+p2_shoot={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":2,"axis":7,"axis_value":1.0,"script":null)
+ ]
+}
+p3_shoot={
+"deadzone": 0.5,
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":3,"axis":7,"axis_value":1.0,"script":null)
  ]
 }

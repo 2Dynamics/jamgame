@@ -1,5 +1,5 @@
 extends Area2D
-
+var bullet_scene= preload("res://Nodes/Bullet.tscn")
 export var player: int
 
 var center: Node2D
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	velocity *= 0.95
 	
 	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
-	if raycast:
+	if raycast and raycast.get("collision", true):
 		velocity = velocity.slide(-grav)
 		if raycast.pixel_number < 9:
 			position -= grav * (9 - raycast.pixel_number)
@@ -41,6 +41,15 @@ func _physics_process(delta: float) -> void:
 
 		controllerangle = Vector2(xAxisRL, yAxisUD).angle()
 		aim.global_rotation = controllerangle+PI*0.5
+		
+	if Input.is_action_just_pressed(action("shoot")):
+		var bullet=bullet_scene.instance()
+		bullet.global_position=aim.global_position
+		bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
+		bullet.dmg=10000
+		bullet.dmg_radius=60
+		
+		get_parent().add_child(bullet)
 	
 
 func action(action: String):
