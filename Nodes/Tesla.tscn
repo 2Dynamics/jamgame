@@ -113,6 +113,7 @@ tracks/4/keys = {
 extents = Vector2( 27, 8 )
 
 [node name="Tesla" type="Area2D"]
+scale = Vector2( 1.694, 1.694 )
 script = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
