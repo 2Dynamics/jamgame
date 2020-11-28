@@ -64,25 +64,25 @@ self_modulate = Color( 1, 0, 0, 1 )
 script = SubResource( 2 )
 
 [node name="Wheel1" type="Sprite" parent="Suspension"]
-position = Vector2( -26, 17 )
+position = Vector2( -24, 17 )
 texture = ExtResource( 4 )
 
 [node name="Wheel2" type="Sprite" parent="Suspension"]
-position = Vector2( -1, 17 )
+position = Vector2( 0, 17 )
 texture = ExtResource( 4 )
 
 [node name="Wheel3" type="Sprite" parent="Suspension"]
-position = Vector2( 22, 17 )
+position = Vector2( 24, 17 )
 texture = ExtResource( 4 )
 
 [node name="W1" type="Position2D" parent="Suspension"]
-position = Vector2( -26, 10 )
+position = Vector2( -24, 10 )
 
 [node name="W2" type="Position2D" parent="Suspension"]
-position = Vector2( -1, 10 )
+position = Vector2( 0, 10 )
 
 [node name="W3" type="Position2D" parent="Suspension"]
-position = Vector2( 22, 10 )
+position = Vector2( 24, 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/stun = SubResource( 3 )
