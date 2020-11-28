@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/PickupableItem.gd" type="Script" id=1]
 [ext_resource path="res://sprite/bonus.png" type="Texture" id=2]
 [ext_resource path="res://sprite/rocket.png" type="Texture" id=3]
 [ext_resource path="res://sprite/laser.png" type="Texture" id=4]
 [ext_resource path="res://sprite/fire.png" type="Texture" id=5]
+[ext_resource path="res://sprite/llaser.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.349
@@ -53,5 +54,9 @@ visible = false
 modulate = Color( 0.686275, 0, 1, 1 )
 texture = ExtResource( 3 )
 vframes = 3
+
+[node name="Sprite7" type="Sprite" parent="Icons"]
+visible = false
+texture = ExtResource( 6 )
 
 [connection signal="area_entered" from="." to="." method="_on_PickupableItem_area_entered"]
