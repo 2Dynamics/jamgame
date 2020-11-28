@@ -4,11 +4,12 @@ class_name TeslaSpawner
 var tesla_object := preload("res://Nodes/Tesla.tscn")
 export var initial_speed := 200
 export var spawn_distance:= 1000
+export var spawn_timer := 10.0
+export var spawn_timer_minimal := 2.0
+export var spawn_speed_up := 0.2
 func _ready():
-	spawn()
-	spawn()
-	spawn()
-
+	$Timer.wait_time = spawn_timer
+	
 func spawn():
 	var new_tesla := tesla_object.instance() as Bullet
 	get_parent().add_child( new_tesla )
@@ -23,10 +24,11 @@ func spawn():
 	new_tesla.position = spawn_point
 	new_tesla.dmg = 1000
 	new_tesla.dmg_radius = 50
+	new_tesla.velocity_damping += 0.002
 
 	
 func _on_Timer_timeout():
-	if $Timer.wait_time > 2.0:
-		$Timer.wait_time -= 0.1
+	if $Timer.wait_time > spawn_timer_minimal:
+		$Timer.wait_time -= spawn_speed_up
 	spawn()
 	
