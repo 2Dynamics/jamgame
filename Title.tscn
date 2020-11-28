@@ -6,7 +6,9 @@
 script/source = "extends TextureRect
 
 func _input(event: InputEvent) -> void:
-	get_tree().change_scene(\"res://PlayerTest.tscn\")"
+	if event.is_pressed():
+		get_tree().change_scene(\"res://PlayerTest.tscn\")
+"
 
 [node name="TextureRect" type="TextureRect"]
 anchor_right = 1.0

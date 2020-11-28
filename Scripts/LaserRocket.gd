@@ -13,6 +13,7 @@ func _on_Timer_timeout() -> void:
 	laser.scale *= 0.5
 	laser.dmg *= 0.5
 	laser.dmg_radius *= 0.5
+	laser.shooter_id = shooter_id
 	
 	laser.position = position
 	var dir = velocity.rotated(PI/2)
