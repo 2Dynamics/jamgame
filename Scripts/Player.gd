@@ -113,10 +113,10 @@ func process_suspension(delta, grav):
 		
 		if raycast and raycast.get("collision", true):
 			force = 13.0 / max( 1.0, raycast.pixel_number )
-			wheel.position.y = wheel_points[i].y - 15 + raycast.pixel_number
+			wheel.position.y = wheel_points[i].y - 10 + raycast.pixel_number
 			average_ray_length += raycast.pixel_number
 			collisions_count += 1
-			torque -= (up).cross(wheel.position)
+			torque -= (up).cross(wheel.position.rotated(rotation) )
 #			print (wheel.name, ", t:", torque, ", rotation: ",rotation)
 #			if i == 0:
 #				torque += (up*force).cross(wheel.position)
@@ -124,6 +124,8 @@ func process_suspension(delta, grav):
 #				torque -= (up*force).cross(wheel.position)
 			velocity += up * force * 1.1
 			is_on_ground = true
+		else:
+			wheel.position.y = wheel_points[i].y + 7
 	if torque:
 #		rotation += torque * 0.01
 		rotation = lerp(rotation, rotation + torque * 0.01, 0.1)

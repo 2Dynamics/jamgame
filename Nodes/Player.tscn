@@ -56,11 +56,13 @@ texture = ExtResource( 1 )
 [node name="lufa" type="Node2D" parent="aim/aim2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -16 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="Suspension" type="Node2D" parent="."]
 self_modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 0, -16 )
 script = SubResource( 2 )
 
 [node name="Wheel1" type="Sprite" parent="Suspension"]
@@ -88,4 +90,5 @@ position = Vector2( 24, 10 )
 anims/stun = SubResource( 3 )
 
 [node name="body" type="Sprite" parent="."]
+position = Vector2( 0, -16 )
 texture = ExtResource( 3 )
