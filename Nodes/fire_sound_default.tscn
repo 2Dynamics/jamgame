@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sfx/laser.wav" type="AudioStream" id=1]
+
+[sub_resource type="AudioStreamRandomPitch" id=1]
+audio_stream = ExtResource( 1 )
+random_pitch = 1.43
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = SubResource( 1 )
+volume_db = -13.136
+pitch_scale = 1.61
+autoplay = true
