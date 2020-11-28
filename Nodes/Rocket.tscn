@@ -24,8 +24,8 @@ tracks/0/keys = {
 
 [node name="Rocket" type="Area2D"]
 script = ExtResource( 1 )
-dmg = 10000
-dmg_radius = 600
+dmg = 20000
+dmg_radius = 160
 
 [node name="Particles2D" type="Particles2D" parent="."]
 

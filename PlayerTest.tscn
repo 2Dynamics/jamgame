@@ -15,8 +15,13 @@
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+var pickupableitem_object := load(\"res://Nodes/PickupableItem.tscn\")
+
 var spawn_pickupable_time = 20
 var spawn_pickupable_timer = 0
+
+var min_spawn_pickupableitem_radius = 80
+var max_spawn_pickupableitem_radius = 300
 
 func _ready() -> void:
 	randomize()
@@ -31,8 +36,12 @@ func _process(delta):
 	if spawn_pickupable_timer < spawn_pickupable_time:
 		spawn_pickupable_timer += delta
 	else:
-		var pickupable_item = load(\"res://Scripts/PickupableItem.gd\").new()
-		pickupable_item
+		spawn_pickupable_timer = 0
+		var spawn_radius = rand_range(min_spawn_pickupableitem_radius,max_spawn_pickupableitem_radius)
+		var spawn_angle = rand_range( 0, TAU )
+		var pickupable_item = pickupableitem_object.instance()
+		add_child(pickupable_item)
+		pickupable_item.global_position = globals.center.global_position + Vector2(spawn_radius, 0).rotated(spawn_angle)
 	pass
 
 
