@@ -3,7 +3,19 @@ extends Node2D
 
 
 func draw_explosion(position: Vector2, radius: float, damage: float):
-	radius = map.update_grid_penetrating_explosive_damage_circle(position, radius, damage, 0.5)
+	radius = map.update_grid_penetrating_explosive_damage_circle(position, radius, damage, 0.3)
+	
+	var x := clamp(position.x - radius, 0, map.get_texture().get_width())
+	var y := clamp(position.y - radius, 0, map.get_texture().get_height())
+	var w := min(radius * 2, map.get_texture().get_width() - x)
+	var h := min(radius * 2, map.get_texture().get_height() - y)
+	
+	map.update_texture(Vector2(x, y), Vector2(w, h))
+	map.generate_mipmaps()
+
+
+func draw_heal(position: Vector2, radius: float, heal: float):
+	map.update_grid_damage_circle_hardness(position, radius, heal, 1)
 	
 	var x := clamp(position.x - radius, 0, map.get_texture().get_width())
 	var y := clamp(position.y - radius, 0, map.get_texture().get_height())
