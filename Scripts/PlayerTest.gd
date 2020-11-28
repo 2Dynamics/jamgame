@@ -36,10 +36,15 @@ func _process(delta):
 	pass
 
 
+var endgame: int
+
 func _on_endgame_timer_timeout():
 	var explo = preload("res://Nodes/big_explosion.tscn").instance()
 	add_child(explo)
 	explo.rotation=rand_range(0,2*PI)
 	explo.scale*=rand_range(0.5,1.5)
 	explo.global_position=Vector2(1024,1024)+Vector2(rand_range(-300,300),rand_range(-300,300))
-	pass # Replace with function body.
+	
+	endgame += 1
+	if endgame >= 100:
+		get_tree().change_scene("res://Title.tscn")
