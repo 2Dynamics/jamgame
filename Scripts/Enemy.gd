@@ -86,4 +86,5 @@ func _on_Timer_timeout():
 	shoot()
 
 func clear():
+	globals.add_score(100)
 	queue_free()

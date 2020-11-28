@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://marsdefense-splash2.png" type="Texture" id=1]
+[ext_resource path="res://Bauhaus 93 Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends TextureRect
+
+func _ready() -> void:
+	var f = File.new()
+	if f.file_exists(\"user://score\"):
+		f.open(\"user://score\", f.READ)
+		$Label2.text = \"HIGHSCORE \" + f.get_line()
+	else:
+		$Label2.hide()
 
 func _input(event: InputEvent) -> void:
 	if event.is_pressed():
@@ -12,6 +21,14 @@ func _input(event: InputEvent) -> void:
 		yield(get_tree(), \"idle_frame\")
 		get_tree().change_scene(\"res://PlayerTest.tscn\")
 "
+
+[sub_resource type="DynamicFont" id=2]
+size = 100
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 30
+font_data = ExtResource( 2 )
 
 [node name="TextureRect" type="TextureRect"]
 anchor_right = 1.0
@@ -24,12 +41,24 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_left = 517.018
-margin_top = 936.565
-margin_right = 610.018
-margin_bottom = 950.565
-rect_scale = Vector2( 10, 10 )
+margin_left = 655.122
+margin_top = 950.852
+margin_right = 1282.12
+margin_bottom = 1064.85
+custom_fonts/font = SubResource( 2 )
 text = "PRESS ANY KEY"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 26.4364
+margin_top = 20.231
+margin_right = 207.436
+margin_bottom = 54.231
+custom_fonts/font = SubResource( 16 )
+text = "HIGHSCORE 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }

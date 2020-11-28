@@ -1,6 +1,12 @@
 extends Node2D
 
+var score = 0
 
+signal score_changed
+
+func add_score(s):
+	score += s
+	emit_signal("score_changed")
 
 func draw_explosion(position: Vector2, radius: float, damage: float):
 	radius = map.update_grid_penetrating_explosive_damage_circle(position, radius, damage, 0.3)

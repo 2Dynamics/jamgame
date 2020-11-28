@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var score = $CanvasLayer/Label
+
 var pickupableitem_scene := load("res://Nodes/PickupableItem.tscn")
 var enemy_scene := load("res://Nodes/Enemy.tscn")
 
@@ -15,7 +17,17 @@ func _ready() -> void:
 	randomize()
 	globals.center = $Center
 	globals.map = $DynamicGridMap
+	globals.connect("score_changed", self, "update_score")
+	
+	var f = File.new()
+	if f.file_exists("user://score"):
+		f.open("user://score", f.READ)
+		$CanvasLayer/Label2.text = "HIGHSCORE " + f.get_line()
+	else:
+		$CanvasLayer/Label2.hide()
 
+func update_score():
+	score.text = str("SCORE ", globals.score)
 
 func _process(delta):
 	spawn_pickupable_timer += delta
@@ -44,6 +56,11 @@ func _on_endgame_timer_timeout():
 	explo.rotation=rand_range(0,2*PI)
 	explo.scale*=rand_range(0.5,1.5)
 	explo.global_position=Vector2(1024,1024)+Vector2(rand_range(-300,300),rand_range(-300,300))
+	
+	var f := File.new()
+	f.open("user://score", f.WRITE)
+	f.store_line(str(globals.score))
+	globals.disconnect("score_changed", self, "update_score")
 	
 	endgame += 1
 	if endgame >= 1000:
