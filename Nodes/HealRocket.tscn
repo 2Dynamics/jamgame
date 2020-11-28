@@ -23,6 +23,7 @@ tracks/0/keys = {
 }
 
 [node name="HealRocket" type="Area2D"]
+modulate = Color( 0, 1, 0, 1 )
 script = ExtResource( 1 )
 dmg = 10000
 dmg_radius = 40

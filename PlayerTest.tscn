@@ -33,9 +33,8 @@ func _ready() -> void:
 
 
 func _process(delta):
-	if spawn_pickupable_timer < spawn_pickupable_time:
-		spawn_pickupable_timer += delta
-	else:
+	spawn_pickupable_timer += delta
+	if spawn_pickupable_timer >= spawn_pickupable_time:
 		spawn_pickupable_timer = 0
 		var spawn_radius = rand_range(min_spawn_pickupableitem_radius,max_spawn_pickupableitem_radius)
 		var spawn_angle = rand_range( 0, TAU )
