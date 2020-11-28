@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://crack.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Nodes/Enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sprite/bg.png" type="Texture" id=8]
 [ext_resource path="res://sprite/core.png" type="Texture" id=9]
+[ext_resource path="res://Nodes/TeslaSpawner.tscn" type="PackedScene" id=10]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
@@ -17,6 +18,7 @@ var spawn_pickupable_time = 20
 var spawn_pickupable_timer = 0
 
 func _ready() -> void:
+	randomize()
 	globals.center = $Center
 	globals.map = $DynamicGridMap
 
@@ -151,6 +153,8 @@ orbit_distance = 600.0
 [node name="PickupableItem" type="Node2D" parent="Center"]
 position = Vector2( -1025.31, -1042.35 )
 script = ExtResource( 9 )
+
+[node name="TeslaSpawner" parent="Center" instance=ExtResource( 10 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1024, 1038 )
