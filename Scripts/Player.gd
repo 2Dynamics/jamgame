@@ -1,8 +1,10 @@
 extends Area2D
 class_name Player
 
-var bullet_scene= load("res://Nodes/Bullet.tscn")
 export var player: int
+
+var laser_scene = load("res://Nodes/Laser.tscn")
+var rocket_scene = load("res://Nodes/Rocket.tscn")
 
 var center: Node2D
 var velocity: Vector2
@@ -70,12 +72,11 @@ func _physics_process(delta: float) -> void:
 			aim.global_rotation = (current_mouse_pos-aim.global_position).angle()+PI*0.5
 		
 	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
-		var bullet=bullet_scene.instance()
+#		var bullet = laser_scene.instance()
+		var bullet = rocket_scene.instance()
 		bullet.shooter_id=player
 		bullet.global_position=aim.global_position
 		bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-		bullet.dmg=10000
-		bullet.dmg_radius=60
 		
 		get_parent().add_child(bullet)
 

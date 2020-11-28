@@ -1,7 +1,7 @@
 extends Node2D
 class_name Enemy
 
-var bullet_object := preload("res://Nodes/Bullet.tscn")
+var bullet_object := load("res://Nodes/Laser.tscn")
 
 export var life := 600.0
 
