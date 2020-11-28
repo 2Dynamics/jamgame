@@ -19,6 +19,11 @@ func get_shooter_id():
 func _enter_tree():
 	set_meta("bullet", true)
 
+func _ready():
+	if !has_node("AudioStreamPlayer2D"):
+		add_child(preload("res://Nodes/fire_sound_default.tscn").instance())
+	connect("tree_exiting", globals, "kill_sound", [$AudioStreamPlayer2D])
+
 func _physics_process(delta):
 	var grav = global_position.direction_to(globals.center.global_position)
 	velocity += grav * globals.gravity_scale * gravity_scale * delta

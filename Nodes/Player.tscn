@@ -1,130 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://sprite/aim_2.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://sprite/rover1o2.png" type="Texture" id=3]
 [ext_resource path="res://sprite/wheel.png" type="Texture" id=4]
-[ext_resource path="res://sprite/exhaust2.png" type="Texture" id=5]
-
-[sub_resource type="Animation" id=4]
-resource_name = "burn"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("exhaust1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 4, 5, 6, 7 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("exhaust2:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 4, 6, 7, 3 ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "relax"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("exhaust1:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 2, 1, 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("exhaust2:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 2, 1, 0 ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "burn"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("exhaust3:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 4, 5, 6, 7 ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "relax"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("exhaust3:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 2, 1, 0 ]
-}
-
-[sub_resource type="Animation" id=8]
-resource_name = "burn"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/path = NodePath("exhaust4:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 4, 5, 6, 7 ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "relax"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/path = NodePath("exhaust4:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 3, 2, 1, 0 ]
-}
+[ext_resource path="res://sfx/523205__matrixxx__retro-laser-gun-shot.wav" type="AudioStream" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 40.0
@@ -149,7 +29,7 @@ func _draw():
 length = 0.408
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Suspension:modulate")
+tracks/0/path = NodePath("body:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -161,48 +41,14 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="AudioStreamRandomPitch" id=4]
+audio_stream = ExtResource( 5 )
+random_pitch = 1.6
+
 [node name="Player" type="Area2D" groups=[
 "falling",
 ]]
 script = ExtResource( 2 )
-
-[node name="ExhaustPlayer1" type="AnimationPlayer" parent="."]
-anims/burn = SubResource( 4 )
-anims/relax = SubResource( 5 )
-next/burn = "relax"
-
-[node name="exhaust1" type="Sprite" parent="."]
-position = Vector2( -12, -1 )
-rotation = -1.5708
-texture = ExtResource( 5 )
-hframes = 8
-
-[node name="exhaust2" type="Sprite" parent="."]
-position = Vector2( 12, -1 )
-rotation = -1.5708
-texture = ExtResource( 5 )
-hframes = 8
-
-[node name="ExhaustPlayer2" type="AnimationPlayer" parent="."]
-anims/burn = SubResource( 6 )
-anims/relax = SubResource( 7 )
-next/burn = "relax"
-
-[node name="exhaust3" type="Sprite" parent="."]
-position = Vector2( -33, -15 )
-texture = ExtResource( 5 )
-hframes = 8
-
-[node name="ExhaustPlayer3" type="AnimationPlayer" parent="."]
-anims/burn = SubResource( 8 )
-anims/relax = SubResource( 9 )
-next/burn = "relax"
-
-[node name="exhaust4" type="Sprite" parent="."]
-position = Vector2( 33, -16 )
-rotation = 3.14159
-texture = ExtResource( 5 )
-hframes = 8
 
 [node name="aim" type="Node2D" parent="."]
 position = Vector2( 0, -17 )
@@ -265,3 +111,7 @@ position = Vector2( -17, -23 )
 
 [node name="Position2D4" type="Position2D" parent="colliders"]
 position = Vector2( 19, -23 )
+
+[node name="hitsound" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource( 4 )
+volume_db = -16.37
