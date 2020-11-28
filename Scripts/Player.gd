@@ -11,15 +11,18 @@ var stun_time = 0
 var reparable_time = 0
 var wheel_points: Array
 
+export var color:Color
+
 
 onready var aim = $aim
 onready var sprite = $Sprite
 
 func _ready() -> void:
+	modulate=color
 	for wheel in sprite.get_children():
 		wheel_points.append(wheel.position)
 var last_mouse_pos:Vector2
-onready var aim= $Sprite/aim
+
 
 func _physics_process(delta: float) -> void:
 	var grav = global_position.direction_to(globals.center.global_position)
@@ -70,6 +73,7 @@ func _physics_process(delta: float) -> void:
 		
 	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
 		var bullet=bullet_scene.instance()
+		bullet.shooter_id=player
 		bullet.global_position=aim.global_position
 		bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
 		bullet.dmg=10000
@@ -80,6 +84,8 @@ func _physics_process(delta: float) -> void:
 	if stun_time > 0:
 		stun_time -= delta
 		if stun_time < 0:
+			$AnimationPlayer.stop()
+			modulate=color
 			stun_time = 0
 		
 	last_mouse_pos=get_global_mouse_position()
@@ -88,6 +94,7 @@ func action(action: String):
 	return str("p", player, "_", action)
 
 func setStun():
+	$AnimationPlayer.play("stun")
 	stun_time = 4
 	pass
 

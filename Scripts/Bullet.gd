@@ -1,6 +1,7 @@
 extends Node2D
 class_name Bullet
 
+var shooter_id=-1
 var velocity := Vector2.ZERO
 var dmg := 0
 var dmg_radius := 0
@@ -37,7 +38,8 @@ func collideWithMap():
 
 func _on_Bullet_area_entered(area):
 	if area is Player:
-		area.setStun()
-		globals.draw_explosion(global_position, dmg_radius, dmg)
-		queue_free()
+		if shooter_id!=area.player:
+			area.setStun()
+			globals.draw_explosion(global_position, dmg_radius, dmg)
+			queue_free()
 	pass # Replace with function body.
