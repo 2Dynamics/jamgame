@@ -9,6 +9,9 @@ export var gravity_scale = 1.0
 var shooter_id = -1
 var velocity := Vector2.ZERO
 
+func _enter_tree():
+	set_meta("bullet", true)
+
 func _physics_process(delta):
 	var grav = global_position.direction_to(globals.center.global_position)
 	velocity += grav * globals.gravity_scale * gravity_scale * delta
@@ -36,4 +39,8 @@ func _on_Bullet_area_entered(area):
 		if shooter_id != area.eneny_id:
 			area.clear()
 			on_hit()
-		
+	elif area.has_meta("bullet"):
+		if shooter_id == -1 or shooter_id == load("res://Scripts/Enemy.gd").eneny_id:
+			if shooter_id != area.shooter_id:
+				on_hit()
+				area.on_hit()
