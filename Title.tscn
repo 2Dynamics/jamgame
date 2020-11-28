@@ -7,6 +7,9 @@ script/source = "extends TextureRect
 
 func _input(event: InputEvent) -> void:
 	if event.is_pressed():
+		$Label.text = \"LOADING\"
+		yield(get_tree(), \"idle_frame\")
+		yield(get_tree(), \"idle_frame\")
 		get_tree().change_scene(\"res://PlayerTest.tscn\")
 "
 
@@ -16,6 +19,17 @@ anchor_bottom = 1.0
 texture = ExtResource( 1 )
 expand = true
 script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 517.018
+margin_top = 936.565
+margin_right = 610.018
+margin_bottom = 950.565
+rect_scale = Vector2( 10, 10 )
+text = "PRESS ANY KEY"
 __meta__ = {
 "_edit_use_anchors_": false
 }
