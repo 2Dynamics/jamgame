@@ -18,10 +18,22 @@ _global_script_classes=[ {
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Scripts/Enemy.gd"
+}, {
+"base": "Node2D",
+"class": "PickupableItem",
+"language": "GDScript",
+"path": "res://Scripts/PickupableItem.gd"
+}, {
+"base": "Area2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Scripts/Player.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
-"Enemy": ""
+"Enemy": "",
+"PickupableItem": "",
+"Player": ""
 }
 
 [application]

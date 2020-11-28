@@ -24,7 +24,6 @@ func _physics_process(delta):
 		globals.draw_explosion(global_position, dmg_radius, dmg)
 		queue_free()
 		# todo
-		pass
 	pass
 
 func _process(delta):
@@ -34,3 +33,11 @@ func _process(delta):
 func collideWithMap():
 	return globals.map.is_pixel_solid_v(global_position)
 	pass
+
+
+func _on_Bullet_area_entered(area):
+	if area is Player:
+		area.setStun()
+		globals.draw_explosion(global_position, dmg_radius, dmg)
+		queue_free()
+	pass # Replace with function body.

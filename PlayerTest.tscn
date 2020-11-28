@@ -1,5 +1,6 @@
 [gd_scene load_steps=18 format=2]
 
+
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://crack.png" type="Texture" id=2]
 [ext_resource path="res://noise.jpg" type="Texture" id=3]
@@ -9,13 +10,27 @@
 [ext_resource path="res://Nodes/Enemy.tscn" type="PackedScene" id=7]
 [ext_resource path="res://sprite/bg.png" type="Texture" id=8]
 [ext_resource path="res://sprite/core.png" type="Texture" id=9]
+[ext_resource path="res://core.gd" type="Script" id=10]
+[ext_resource path="res://Scripts/PickupableItem.gd" type="Script" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node2D
 
+var spawn_pickupable_time = 20
+var spawn_pickupable_timer = 0
+
 func _ready() -> void:
 	globals.center = $Center
 	globals.map = $DynamicGridMap
+
+
+func _process(delta):
+	if spawn_pickupable_timer < spawn_pickupable_time:
+		spawn_pickupable_timer += delta
+	else:
+		var pickupable_item = load(\"res://Scripts/PickupableItem.gd\").new()
+		pickupable_item
+	pass
 "
 
 [sub_resource type="ShaderMaterial" id=2]
@@ -134,6 +149,10 @@ position = Vector2( 1025.31, 1042.35 )
 position = Vector2( -660.38, -449.539 )
 spawn_distance = 800.0
 orbit_distance = 600.0
+
+[node name="PickupableItem" type="Node2D" parent="Center"]
+position = Vector2( -1025.31, -1042.35 )
+script = ExtResource( 9 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 1024, 1038 )
