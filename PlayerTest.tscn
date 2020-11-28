@@ -11,56 +11,9 @@
 [ext_resource path="res://sprite/core.png" type="Texture" id=9]
 [ext_resource path="res://Nodes/TeslaSpawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://core.gd" type="Script" id=11]
+[ext_resource path="res://Scripts/PlayerTest.gd" type="Script" id=12]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Node2D
-
-var pickupableitem_scene := load(\"res://Nodes/PickupableItem.tscn\")
-var enemy_scene := load(\"res://Nodes/Enemy.tscn\")
-
-var spawn_pickupable_time = 5
-var spawn_pickupable_timer = 0
-var min_spawn_pickupableitem_radius = 80
-var max_spawn_pickupableitem_radius = 300
-
-var spawn_enemy_time = 20
-var spawn_enemy_timer = 0
-
-func _ready() -> void:
-	randomize()
-	globals.center = $Center
-	globals.map = $DynamicGridMap
-
-
-func _process(delta):
-	spawn_pickupable_timer += delta
-	if spawn_pickupable_timer >= spawn_pickupable_time:
-		spawn_pickupable_timer = 0
-		var spawn_radius = rand_range(min_spawn_pickupableitem_radius,max_spawn_pickupableitem_radius)
-		var spawn_angle = rand_range( 0, TAU )
-		var pickupable_item = pickupableitem_scene.instance()
-		add_child(pickupable_item)
-		pickupable_item.global_position = globals.center.global_position + Vector2(spawn_radius, 0).rotated(spawn_angle)
-
-	if spawn_enemy_timer < spawn_pickupable_time:
-		spawn_enemy_timer += delta
-	else:
-		spawn_enemy_timer = 0
-		var enemy = enemy_scene.instance()
-		$Center.add_child(enemy)
-	pass
-
-
-func _on_endgame_timer_timeout():
-	var explo = preload(\"res://Nodes/big_explosion.tscn\").instance()
-	add_child(explo)
-	explo.rotation=rand_range(0,2*PI)
-	explo.scale*=rand_range(0.5,1.5)
-	explo.global_position=Vector2(1024,1024)+Vector2(rand_range(-300,300),rand_range(-300,300))
-	pass # Replace with function body.
-"
-
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 6 )
 shader_param/global_transform = null
 shader_param/cutoff = 0.99
@@ -76,7 +29,10 @@ shader_param/noise_tiled = ExtResource( 3 )
 shader_param/random_noise = ExtResource( 5 )
 shader_param/terrain_texture_mix = ExtResource( 4 )
 
-[sub_resource type="MaterialData" id=3]
+[sub_resource type="MaterialData" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id=4]
 blend_mode = 1
@@ -84,10 +40,7 @@ blend_mode = 1
 [sub_resource type="CanvasItemMaterial" id=5]
 blend_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=6]
-blend_mode = 1
-
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 10.0
 loop = true
 tracks/0/type = "value"
@@ -127,11 +80,11 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ), Color( 1, 1, 1, 0.984314 ), Color( 1, 1, 1, 0.603922 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=7]
 radius = 92.2693
 
 [node name="Node2D" type="Node2D"]
-script = SubResource( 1 )
+script = ExtResource( 12 )
 
 [node name="bg" type="Sprite" parent="."]
 position = Vector2( 1036.93, 1063.57 )
@@ -144,8 +97,8 @@ scale = Vector2( 1.215, 1.31 )
 texture = ExtResource( 8 )
 
 [node name="DynamicGridMap" type="DynamicGridMap" parent="."]
-material = SubResource( 2 )
-material_data = SubResource( 3 )
+material = SubResource( 1 )
+material_data = SubResource( 2 )
 texture_path = "res://full.png"
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
@@ -193,31 +146,31 @@ script = ExtResource( 11 )
 
 [node name="core3" type="Sprite" parent="core"]
 modulate = Color( 1, 1, 1, 0.666984 )
-material = SubResource( 4 )
+material = SubResource( 3 )
 scale = Vector2( 1.241, 1.266 )
 texture = ExtResource( 9 )
 
 [node name="core2" type="Sprite" parent="core"]
 modulate = Color( 1, 0.0705882, 0, 1 )
-material = SubResource( 5 )
+material = SubResource( 4 )
 rotation = 4.87457
 scale = Vector2( 0.807, 0.754 )
 texture = ExtResource( 9 )
 
 [node name="core" type="Sprite" parent="core"]
 self_modulate = Color( 4.62, 0, 9.25, 0.5 )
-material = SubResource( 6 )
+material = SubResource( 5 )
 rotation = 1.40862
 scale = Vector2( 0.786, 0.851 )
 texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="core"]
 autoplay = "New Anim"
-"anims/New Anim" = SubResource( 7 )
+"anims/New Anim" = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="core"]
 visible = false
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [node name="endgame_timer" type="Timer" parent="."]
 wait_time = 0.014
