@@ -74,7 +74,6 @@ func shoot():
 	new_bullet.dmg = 20000
 	new_bullet.dmg_radius = 100
 	new_bullet.shooter_id = eneny_id
-	
 
 func damege():
 	life -= 1
@@ -85,7 +84,6 @@ func damege():
 	
 func _on_Timer_timeout():
 	shoot()
-
 
 func clear():
 	queue_free()
