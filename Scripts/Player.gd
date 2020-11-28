@@ -19,6 +19,8 @@ var stun_time = 0
 var reparable_time = 0
 var weapon = -1
 var wheel_points: Array
+var collider_points: Array
+var collider_directions: Array
 var previous_wheel_rotation := 0.0
 var current_wheel_rotation := 0.0
 
@@ -39,8 +41,11 @@ var is_on_ground = false
 func _ready() -> void:
 	$body.self_modulate = color
 	for wheel in suspension.get_children():
-
 		wheel_points.append(wheel.position)
+	
+	for collider in $colliders.get_children():
+		collider_points.append(collider.position)
+		collider_directions.append(collider.position.normalized())
 		
 func _physics_process(delta: float) -> void:
 	var grav = global_position.direction_to(globals.center.global_position)
@@ -73,6 +78,7 @@ func _physics_process(delta: float) -> void:
 	velocity += move * 600 * delta
 
 	process_suspension( delta, grav )
+	process_collisions( delta )
 	
 	if is_on_ground:
 		velocity += grav * globals.gravity_scale * 1 * delta
@@ -104,12 +110,13 @@ func process_suspension(delta, grav):
 	var collisions_count := 0
 	var force_direction := Vector2.ZERO
 	var torque = 0.0
-	
+	var wheel_force = Vector2.ZERO
+	var force = 0.0
 	for i in 3:
 		var wheel: Node2D = suspension.get_child(i)
 		var high_point = wheel_points[i].rotated(rotation) + up * 30
 		var raycast = globals.map.raycast(global_position + high_point, global_position + high_point - up * 20)
-		var force = 0.0
+		
 		
 		if raycast and raycast.get("collision", true):
 			force = 13.0 / max( 1.0, raycast.pixel_number )
@@ -117,39 +124,35 @@ func process_suspension(delta, grav):
 			average_ray_length += raycast.pixel_number
 			collisions_count += 1
 			torque -= (up).cross(wheel.position.rotated(rotation) )
-#			print (wheel.name, ", t:", torque, ", rotation: ",rotation)
-#			if i == 0:
-#				torque += (up*force).cross(wheel.position)
-#			if i == 2:
-#				torque -= (up*force).cross(wheel.position)
-			velocity += up * force * 0.1
+			wheel_force += ((suspension.position - wheel.position).rotated(rotation)).normalized() * force
+#			wheel_force += (wheel.position-suspension.position).normalized() * force
+			
 			is_on_ground = true
 		else:
 			wheel.position.y = wheel_points[i].y + 7
+			
 	if is_on_ground:
-#		rotation += torque * 0.01
-		rotation = lerp(rotation, rotation + torque * 0.01, 0.1)
+		velocity += wheel_force
+		rotation = lerp_angle(rotation, rotation + torque * 0.01, 0.1)
 	else:
 		rotation = lerp_angle(rotation, grav.angle()-PI/2.0, 0.1)
 		
 	if collisions_count:
 		average_ray_length /= collisions_count
-	
-#	rotation += torque * 0.05 * delta
-#		position = lerp(position, 
-#	var height = 30
-#	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
-#	if raycast and raycast.get("collision", true):
-#		velocity = velocity.slide(-grav)
-#		if raycast.pixel_number < height:
-#			position = lerp(position, position - grav * (height - raycast.pixel_number), 0.1)
-#	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
-#	if raycast and raycast.get("collision", true):
-#		velocity = velocity.slide(-grav)
-#		if raycast.pixel_number < 9:
-#			position = lerp(position, position - grav * (9 - raycast.pixel_number), 0.1)
-#
-	
+
+func process_collisions( delta ):
+	var force := 0.0
+	var colider_position := Vector2.ZERO
+	var total_force = Vector2.ZERO
+	for i in 4:
+		colider_position = global_position + collider_points[i].rotated(rotation)
+		var raycast = globals.map.raycast(colider_position, colider_position + collider_directions[i].rotated(rotation) * 5)
+		if raycast and raycast.get("collision", true):
+			print (raycast.pixel_number)
+			force = 5.0 / max( 1.0, raycast.pixel_number )
+			total_force -= collider_directions[i].rotated(rotation) * force
+	velocity += total_force
+
 func process_pad_aim():
 	var deadzone = 0.5
 	var controllerangle = Vector2.ZERO
