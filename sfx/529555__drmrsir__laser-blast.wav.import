@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/529555__drmrsir__laser-blast.wav-713f77e526b8dcda4a6d373827453f98.sample"
+
+[deps]
+
+source_file="res://sfx/529555__drmrsir__laser-blast.wav"
+dest_files=[ "res://.import/529555__drmrsir__laser-blast.wav-713f77e526b8dcda4a6d373827453f98.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

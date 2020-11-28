@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/546080__stavsounds__click.wav-2cae61b9395d133af906558e7b3f5db8.sample"
+
+[deps]
+
+source_file="res://sfx/546080__stavsounds__click.wav"
+dest_files=[ "res://.import/546080__stavsounds__click.wav-2cae61b9395d133af906558e7b3f5db8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

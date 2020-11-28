@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/490266__anomaex__sci-fi-explosion-2.wav-316f8a3d5a2a189e9e32e51b248f311c.sample"
+
+[deps]
+
+source_file="res://sfx/490266__anomaex__sci-fi-explosion-2.wav"
+dest_files=[ "res://.import/490266__anomaex__sci-fi-explosion-2.wav-316f8a3d5a2a189e9e32e51b248f311c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

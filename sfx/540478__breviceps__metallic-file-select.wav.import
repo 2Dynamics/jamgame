@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/540478__breviceps__metallic-file-select.wav-3212e553da36b5214c18fff14ee5d67d.sample"
+
+[deps]
+
+source_file="res://sfx/540478__breviceps__metallic-file-select.wav"
+dest_files=[ "res://.import/540478__breviceps__metallic-file-select.wav-3212e553da36b5214c18fff14ee5d67d.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

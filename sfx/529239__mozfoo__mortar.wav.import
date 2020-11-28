@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/529239__mozfoo__mortar.wav-d683ba662d3ec3de9c31940fa5248ada.sample"
+
+[deps]
+
+source_file="res://sfx/529239__mozfoo__mortar.wav"
+dest_files=[ "res://.import/529239__mozfoo__mortar.wav-d683ba662d3ec3de9c31940fa5248ada.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
