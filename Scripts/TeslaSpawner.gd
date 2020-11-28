@@ -23,6 +23,7 @@ func spawn():
 	new_tesla.position = spawn_point
 	new_tesla.dmg = 1000
 	new_tesla.dmg_radius = 50
+	new_tesla.velocity_damping += 0.002
 
 	
 func _on_Timer_timeout():
