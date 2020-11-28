@@ -40,9 +40,7 @@ func _on_Bullet_area_entered(area):
 			area.clear()
 			on_hit()
 	elif area.has_meta("bullet"):
-		prints(shooter_id)
 		if shooter_id == -1 or shooter_id == load("res://Scripts/Enemy.gd").eneny_id:
-			print(shooter_id, area.shooter_id)
 			if shooter_id != area.shooter_id:
 				on_hit()
 				area.on_hit()

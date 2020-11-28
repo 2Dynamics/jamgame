@@ -57,10 +57,16 @@ func _on_endgame_timer_timeout():
 	explo.scale*=rand_range(0.5,1.5)
 	explo.global_position=Vector2(1024,1024)+Vector2(rand_range(-300,300),rand_range(-300,300))
 	
-	var f := File.new()
-	f.open("user://score", f.WRITE)
-	f.store_line(str(globals.score))
-	globals.disconnect("score_changed", self, "update_score")
+	if endgame == 0:
+		var f := File.new()
+		var s = 0
+		if f.file_exists("user://score"):
+			f.open("user://score", f.READ)
+			s = int(f.get_line())
+			f.close()
+		f.open("user://score", f.WRITE)
+		f.store_line(str(max(s, globals.score)))
+		globals.disconnect("score_changed", self, "update_score")
 	
 	endgame += 1
 	if endgame >= 1000:

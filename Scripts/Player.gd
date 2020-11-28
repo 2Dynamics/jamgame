@@ -73,9 +73,9 @@ func _physics_process(delta: float) -> void:
 		aim.global_rotation = controllerangle+PI*0.5
 
 	
-	if player==0:
-		var current_mouse_pos=get_global_mouse_position()
-		if last_mouse_pos!=current_mouse_pos:
+	if player == 0:
+		var current_mouse_pos = get_global_mouse_position()
+		if not last_mouse_pos.is_equal_approx(current_mouse_pos):
 			aim.global_rotation = (current_mouse_pos-aim.global_position).angle()+PI*0.5
 		
 	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
