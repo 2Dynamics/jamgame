@@ -36,7 +36,7 @@ var last_mouse_pos:Vector2
 #onready var body_offset = $Sprite.position
 
 func _ready() -> void:
-	$body.self_modulate = color
+	sprite.self_modulate = color
 	for wheel in sprite.get_children():
 		wheel_points.append(wheel.position)
 		
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 		move.y = int(Input.is_action_pressed(action("down"))) - int(Input.is_action_pressed(action("up")))
 	
 	sprite.rotation = lerp_angle( sprite.rotation, grav.tangent().angle(), 0.1)
-	$body.rotation = lerp_angle( $body.rotation, grav.tangent().angle(), 0.1)
+	sprite.rotation = lerp_angle( sprite.rotation, grav.tangent().angle(), 0.1)
 	$CollisionShape2D.rotation = lerp_angle( $CollisionShape2D.rotation, grav.angle(), 0.1)
 	
 	velocity += grav * 1000 * delta
@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 		if raycast.pixel_number < 9:
 			position = lerp(position, position - grav * (9 - raycast.pixel_number), 0.1)
 	
-	update()
+#	update()
 	var average_wheel :Vector2 = $Sprite/Wheel2.position - $Sprite/Wheel1.position
 	average_wheel += $Sprite/Wheel3.position - $Sprite/Wheel2.position
 	average_wheel /= 2.0
@@ -75,7 +75,7 @@ func _physics_process(delta: float) -> void:
 	wheels = Vector2(cos(grav.tangent().angle() - wierd_angle), sin(grav.tangent().angle() - wierd_angle))
 
 	
-	$body.rotation = lerp_angle( $body.rotation,  grav.tangent().angle() + wierd_angle, 0.5)
+	sprite.rotation = lerp_angle( sprite.rotation,  grav.tangent().angle() + wierd_angle, 0.5)
 	
 	position += velocity * delta
 	
@@ -160,7 +160,7 @@ func setReparableTime(w: int):
 	reparable_time = 10
 	weapon = w
 
-func _draw():
-	
-	draw_line(Vector2.ZERO, front *100, Color.wheat,3)
-	draw_line(Vector2.ZERO, wheels *100, Color.green,3)
+#func _draw():
+#
+#	draw_line(Vector2.ZERO, front *100, Color.wheat,3)
+#	draw_line(Vector2.ZERO, wheels *100, Color.green,3)

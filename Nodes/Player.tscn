@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 38.3333
 
-[sub_resource type="GDScript" id=3]
+[sub_resource type="GDScript" id=2]
 script/source = "extends Sprite
 
 func _physics_process(delta):
@@ -24,8 +24,7 @@ func _draw():
 	draw_line($W3.position, $Wheel3.position, Color(0.3,0.3,0.3), 2)
 "
 
-[sub_resource type="Animation" id=2]
-resource_name = "stun"
+[sub_resource type="Animation" id=3]
 length = 0.408
 loop = true
 tracks/0/type = "value"
@@ -65,7 +64,7 @@ shape = SubResource( 1 )
 self_modulate = Color( 1, 0, 0, 1 )
 position = Vector2( 1, -17 )
 texture = ExtResource( 3 )
-script = SubResource( 3 )
+script = SubResource( 2 )
 
 [node name="Wheel1" type="Sprite" parent="Sprite"]
 position = Vector2( -26, 17 )
@@ -89,4 +88,4 @@ position = Vector2( -1, 10 )
 position = Vector2( 22, 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/stun = SubResource( 2 )
+anims/stun = SubResource( 3 )
