@@ -14,7 +14,6 @@ func _ready() -> void:
 	for wheel in sprite.get_children():
 		wheel_points.append(wheel.position)
 var last_mouse_pos:Vector2
-onready var aim= $Sprite/aim
 
 func _physics_process(delta: float) -> void:
 	var grav = global_position.direction_to(globals.center.global_position)
@@ -31,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	for i in 3:
 		var wheel: Node2D = sprite.get_child(i)
 		var high_point = wheel_points[i].rotated(rotation) - grav * 30
-		var raycast = globals.map.raycast(global_position + high_point, global_position + high_point + grav * 60)
+		var raycast = globals.map.raycast(global_position + high_point, global_position + high_point + grav * 20)
 		
 		if raycast and raycast.get("collision", true):
 			wheel.position.y = wheel_points[i].y - 15 + raycast.pixel_number
@@ -40,12 +39,10 @@ func _physics_process(delta: float) -> void:
 	if raycast and raycast.get("collision", true):
 		velocity = velocity.slide(-grav)
 		if raycast.pixel_number < 9:
-			position -= grav * (9 - raycast.pixel_number)
+			position = lerp(position, position - grav * (9 - raycast.pixel_number), 0.1)
 	
 	position += velocity * delta
 	
-	
-		
 	var deadzone = 0.5
 	var controllerangle = Vector2.ZERO
 	var xAxisRL = Input.get_joy_axis(player, JOY_AXIS_2)
