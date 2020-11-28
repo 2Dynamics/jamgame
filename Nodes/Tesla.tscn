@@ -145,8 +145,7 @@ shape = SubResource( 9 )
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource( 10 )
-volume_db = -9.609
-pitch_scale = 2.42
+volume_db = -8.919
 autoplay = true
 
 [connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
