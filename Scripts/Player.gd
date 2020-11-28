@@ -54,10 +54,6 @@ func _physics_process(delta: float) -> void:
 		move.x = int(Input.is_action_pressed(action("right"))) - int(Input.is_action_pressed(action("left")))
 		move.y = int(Input.is_action_pressed(action("down"))) - int(Input.is_action_pressed(action("up")))
 	
-
-#	sprite.rotation = lerp_angle( sprite.rotation, grav.tangent().angle(), 0.1)
-#	$body.rotation = lerp_angle( $body.rotation, grav.tangent().angle(), 0.1)
-#	$CollisionShape2D.rotation = lerp_angle( $CollisionShape2D.rotation, grav.angle(), 0.1)
 	
 	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
 	if raycast and raycast.get("collision", true):
@@ -65,7 +61,6 @@ func _physics_process(delta: float) -> void:
 		if raycast.pixel_number < 9:
 			position = lerp(position, position - grav * (9 - raycast.pixel_number), 0.1)
 	
-#	update()
 	var average_wheel :Vector2 = ($Suspension/Wheel2.position - $Suspension/Wheel1.position).normalized()
 	average_wheel += ($Suspension/Wheel3.position - $Suspension/Wheel2.position).normalized()
 	average_wheel /= 2.0
@@ -208,9 +203,3 @@ func setStun():
 func setReparableTime(w: int):
 	reparable_time = 10
 	weapon = w
-
-func _draw():
-	
-	draw_line(Vector2.ZERO, up.rotated(-rotation) * 100, Color.red,3)
-	draw_line(Vector2.ZERO, front.rotated(-rotation) *100, Color.wheat,3)
-
