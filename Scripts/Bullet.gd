@@ -16,18 +16,17 @@ func _physics_process(delta):
 	rotation = velocity.angle()
 
 	if collideWithMap():
-		on_hit()
 		on_map_hit()
 
 func collideWithMap() -> bool:
 	return globals.map.is_pixel_solid_v(global_position)
 
 func on_hit(): pass
-func on_map_hit(): pass
+func on_map_hit():
+	on_hit()
 
 func _on_Bullet_area_entered(area):
 	if area is Player:
 		if shooter_id != area.player:
 			area.setStun()
 			on_hit()
-	pass
