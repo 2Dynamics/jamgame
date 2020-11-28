@@ -15,6 +15,7 @@ script/source = "extends Node2D
 func _ready() -> void:
 	globals.center = $Center
 	globals.gravity_center = $Center.position
+	globals.center_of_gravity = $Center.position
 	globals.map = $DynamicGridMap
 "
 
