@@ -52,3 +52,8 @@ var map: DynamicGridMap
 var gravity_scale := 98.0
 var gravity_center :Vector2
 var center_of_gravity :Vector2
+
+func kill_sound(player):
+	player.get_parent().remove_child(player)
+	add_child(player)
+	player.connect("finished", player, "queue_free")

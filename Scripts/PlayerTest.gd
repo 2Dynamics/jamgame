@@ -58,6 +58,7 @@ func _on_endgame_timer_timeout():
 	explo.global_position=Vector2(1024,1024)+Vector2(rand_range(-300,300),rand_range(-300,300))
 	
 	if endgame == 0:
+		$endsound.play()
 		var f := File.new()
 		var s = 0
 		if f.file_exists("user://score"):

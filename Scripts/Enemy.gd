@@ -9,7 +9,7 @@ export var shoot_delay := 5.0
 export var bullet_speed:= 100.0
 
 export var spawn_distance := 500.0
-export var orbit_distance := 300.0
+export var orbit_distance := 10.0
 export var orbit_variance := 10.0
 export var orbit_speed := 0.1
 
@@ -49,7 +49,6 @@ func _physics_process(delta):
 	velocity += distance_from_desired_orbit.normalized() * min(distance_from_desired_orbit.length(),100) * speed
 	velocity *= 0.97
 	position += velocity * delta
-#	position = lerp(position, orbit_position, 0.01)
 	
 	sprite.rotation = (position.angle())
 #	damege()

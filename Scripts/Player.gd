@@ -133,6 +133,7 @@ func process_weapons():
 				
 
 func process_stun(delta):
+
 	if stun_time > 0:
 		stun_time -= delta
 		if stun_time < 0:
@@ -152,6 +153,7 @@ func action(action: String):
 	return str("p", player, "_", action)
 
 func setStun():
+	$hitsound.play()
 	$AnimationPlayer.play("stun")
 	stun_time = 1
 	pass
