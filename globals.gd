@@ -14,6 +14,18 @@ func draw_explosion(position: Vector2, radius: float, damage: float):
 	map.generate_mipmaps()
 
 
+func draw_heal(position: Vector2, radius: float, heal: float):
+	map.update_grid_damage_circle_hardness(position, radius, heal, 1)
+	
+	var x := clamp(position.x - radius, 0, map.get_texture().get_width())
+	var y := clamp(position.y - radius, 0, map.get_texture().get_height())
+	var w := min(radius * 2, map.get_texture().get_width() - x)
+	var h := min(radius * 2, map.get_texture().get_height() - y)
+	
+	map.update_texture(Vector2(x, y), Vector2(w, h))
+	map.generate_mipmaps()
+
+
 
 func draw_image(position: Vector2, brush_image, positive: int):
 	map.update_grid_with_mask(position, brush_image, positive )

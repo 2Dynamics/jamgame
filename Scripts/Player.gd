@@ -1,18 +1,23 @@
 extends Area2D
-var bullet_scene= preload("res://Nodes/Bullet.tscn")
+class_name Player
+
+var bullet_scene= load("res://Nodes/Bullet.tscn")
 export var player: int
 
 var center: Node2D
 var velocity: Vector2
 var prev_move: Vector2
+var stun_time = 0
+var reparable_time = 0
 
 onready var aim= $Sprite/aim
 
 func _physics_process(delta: float) -> void:
 	var grav = global_position.direction_to(globals.center.global_position)
 	var move: Vector2
-	move.x = int(Input.is_action_pressed(action("right"))) - int(Input.is_action_pressed(action("left")))
-	move.y = int(Input.is_action_pressed(action("down"))) - int(Input.is_action_pressed(action("up")))
+	if stun_time <= 0:
+		move.x = int(Input.is_action_pressed(action("right"))) - int(Input.is_action_pressed(action("left")))
+		move.y = int(Input.is_action_pressed(action("down"))) - int(Input.is_action_pressed(action("up")))
 	
 	rotation = lerp_angle(rotation, grav.angle() - PI/2, 0.1)
 	
@@ -41,8 +46,8 @@ func _physics_process(delta: float) -> void:
 
 		controllerangle = Vector2(xAxisRL, yAxisUD).angle()
 		aim.global_rotation = controllerangle+PI*0.5
-		
-	if Input.is_action_just_pressed(action("shoot")):
+
+	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
 		var bullet=bullet_scene.instance()
 		bullet.global_position=aim.global_position
 		bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
@@ -50,7 +55,18 @@ func _physics_process(delta: float) -> void:
 		bullet.dmg_radius=60
 		
 		get_parent().add_child(bullet)
-	
+
+	if stun_time > 0:
+		stun_time -= delta
+		if stun_time < 0:
+			stun_time = 0
 
 func action(action: String):
 	return str("p", player, "_", action)
+
+func setStun():
+	stun_time = 4
+	pass
+
+func setReparableTime():
+	reparable_time = 10
