@@ -19,6 +19,8 @@ var stun_time = 0
 var reparable_time = 0
 var weapon = -1
 var wheel_points: Array
+var collider_points: Array
+var collider_directions: Array
 var previous_wheel_rotation := 0.0
 var current_wheel_rotation := 0.0
 
@@ -27,18 +29,23 @@ export var color:Color
 enum {LASER = -1, ROCKET, HEALING_ROCKET, FAT_LASER, FIRE, LASER_ROCKET, HOMING_ROCKET, LONG_LASER}
 
 var front := Vector2.ZERO
+var up := Vector2.ZERO
 var wheels := Vector2.ZERO
 
 onready var aim = $aim
-onready var sprite = $Sprite
+onready var suspension = $Suspension
 var last_mouse_pos:Vector2
 
-#onready var body_offset = $Sprite.position
+var is_on_ground = false
 
 func _ready() -> void:
-	sprite.self_modulate = color
-	for wheel in sprite.get_children():
+	$body.self_modulate = color
+	for wheel in suspension.get_children():
 		wheel_points.append(wheel.position)
+	
+	for collider in $colliders.get_children():
+		collider_points.append(collider.position)
+		collider_directions.append(collider.position.normalized())
 		
 func _physics_process(delta: float) -> void:
 	var grav = global_position.direction_to(globals.center.global_position)
@@ -47,15 +54,6 @@ func _physics_process(delta: float) -> void:
 		move.x = int(Input.is_action_pressed(action("right"))) - int(Input.is_action_pressed(action("left")))
 		move.y = int(Input.is_action_pressed(action("down"))) - int(Input.is_action_pressed(action("up")))
 	
-	sprite.rotation = lerp_angle( sprite.rotation, grav.tangent().angle(), 0.1)
-	sprite.rotation = lerp_angle( sprite.rotation, grav.tangent().angle(), 0.1)
-	$CollisionShape2D.rotation = lerp_angle( $CollisionShape2D.rotation, grav.angle(), 0.1)
-	
-	velocity += grav * 1000 * delta
-	velocity += move * 1200 * delta
-	velocity *= 0.95
-
-	process_suspension(grav)
 	
 	var raycast = globals.map.raycast(global_position - grav * 8, global_position + grav)
 	if raycast and raycast.get("collision", true):
@@ -63,30 +61,36 @@ func _physics_process(delta: float) -> void:
 		if raycast.pixel_number < 9:
 			position = lerp(position, position - grav * (9 - raycast.pixel_number), 0.1)
 	
-#	update()
-	var average_wheel :Vector2 = $Sprite/Wheel2.position - $Sprite/Wheel1.position
-	average_wheel += $Sprite/Wheel3.position - $Sprite/Wheel2.position
+	var average_wheel :Vector2 = ($Suspension/Wheel2.position - $Suspension/Wheel1.position).normalized()
+	average_wheel += ($Suspension/Wheel3.position - $Suspension/Wheel2.position).normalized()
 	average_wheel /= 2.0
 	
+	wheels = average_wheel.rotated(rotation)
+	front = Vector2.RIGHT.rotated(rotation)
 	
-	var wierd_angle = grav.tangent().angle() + grav.tangent().angle_to(average_wheel)
+	up = Vector2.UP.rotated(rotation)
 	
-	front = Vector2(cos(grav.tangent().angle()), sin(grav.tangent().angle()))
-	wheels = Vector2(cos(grav.tangent().angle() - wierd_angle), sin(grav.tangent().angle() - wierd_angle))
+	velocity += move * 600 * delta
 
+	process_suspension( delta, grav )
+	process_collisions( delta )
 	
-	sprite.rotation = lerp_angle( sprite.rotation,  grav.tangent().angle() + wierd_angle, 0.5)
-	
+	if is_on_ground:
+		velocity += grav * globals.gravity_scale * 1 * delta
+	else:
+		velocity += grav * globals.gravity_scale * 5 * delta
+		
+#	update()
+	velocity -= velocity * 0.06
 	position += velocity * delta
 	
 	process_pad_aim()
-		
+	
 	process_mouse_aim()
-		
+	
 	process_weapons()
 	
 	process_stun(delta)
-
 
 	reparable_time -= delta
 	if reparable_time <= 0:
@@ -95,15 +99,54 @@ func _physics_process(delta: float) -> void:
 	last_mouse_pos = get_global_mouse_position()
 	
 	
-func process_suspension(grav):
+func process_suspension(delta, grav):
+	is_on_ground = false
+	var average_ray_length := 0.0
+	var collisions_count := 0
+	var force_direction := Vector2.ZERO
+	var torque = 0.0
+	var wheel_force = Vector2.ZERO
+	var force = 0.0
 	for i in 3:
-		var wheel: Node2D = sprite.get_child(i)
-		var high_point = wheel_points[i].rotated(rotation) - grav * 30
-		var raycast = globals.map.raycast(global_position + high_point, global_position + high_point + grav * 20)
+		var wheel: Node2D = suspension.get_child(i)
+		var high_point = wheel_points[i].rotated(rotation) + up * 30
+		var raycast = globals.map.raycast(global_position + high_point, global_position + high_point - up * 20)
+		
 		
 		if raycast and raycast.get("collision", true):
-			wheel.position.y = wheel_points[i].y - 15 + raycast.pixel_number
-	
+			force = 13.0 / max( 1.0, raycast.pixel_number )
+			wheel.position.y = wheel_points[i].y - 10 + raycast.pixel_number
+			average_ray_length += raycast.pixel_number
+			collisions_count += 1
+			torque -= (up).cross(wheel.position.rotated(rotation) )
+			wheel_force += ((suspension.position - wheel.position).rotated(rotation)).normalized() * force
+#			wheel_force += (wheel.position-suspension.position).normalized() * force
+			
+			is_on_ground = true
+		else:
+			wheel.position.y = wheel_points[i].y + 7
+			
+	if is_on_ground:
+		velocity += wheel_force
+		rotation = lerp_angle(rotation, rotation + torque * 0.01, 0.1)
+	else:
+		rotation = lerp_angle(rotation, grav.angle()-PI/2.0, 0.1)
+		
+	if collisions_count:
+		average_ray_length /= collisions_count
+
+func process_collisions( delta ):
+	var force := 0.0
+	var colider_position := Vector2.ZERO
+	var total_force = Vector2.ZERO
+	for i in 4:
+		colider_position = global_position + collider_points[i].rotated(rotation)
+		var raycast = globals.map.raycast(colider_position, colider_position + collider_directions[i].rotated(rotation) * 5)
+		if raycast and raycast.get("collision", true):
+			force = 5.0 / max( 1.0, raycast.pixel_number )
+			total_force -= collider_directions[i].rotated(rotation) * force
+	velocity += total_force
+
 func process_pad_aim():
 	var deadzone = 0.5
 	var controllerangle = Vector2.ZERO
@@ -138,7 +181,7 @@ func process_stun(delta):
 		stun_time -= delta
 		if stun_time < 0:
 			$AnimationPlayer.stop()
-			sprite.modulate = color
+			$body.modulate = color
 			stun_time = 0
 
 func shoot_bullet(b):
@@ -161,8 +204,3 @@ func setStun():
 func setReparableTime(w: int):
 	reparable_time = 10
 	weapon = w
-
-#func _draw():
-#
-#	draw_line(Vector2.ZERO, front *100, Color.wheat,3)
-#	draw_line(Vector2.ZERO, wheels *100, Color.green,3)
