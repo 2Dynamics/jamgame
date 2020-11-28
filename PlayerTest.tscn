@@ -136,7 +136,7 @@ material = SubResource( 9 )
 material_data = SubResource( 10 )
 texture_path = "res://full.png"
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
+[node name="Player1" parent="." instance=ExtResource( 1 )]
 position = Vector2( 622.17, 591.279 )
 color = Color( 1, 1, 1, 1 )
 
