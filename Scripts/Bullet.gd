@@ -6,26 +6,30 @@ var dmg := 0
 var dmg_radius := 0
 var accel := Vector2.ZERO
 var center_of_gravity := Vector2.ZERO
-var gravicy_accel_val := 98.0
 
-# Called when the node enters the scene tree for the first time.
+onready var sprite := $Sprite
+
 func _ready():
 	center_of_gravity = globals.gravity_center
-	pass # Replace with function body.
+#	center_of_gravity = globals.center.global_position
+	pass
 
 func _physics_process(delta):
-	accel += (center_of_gravity-global_position).normalized() * gravicy_accel_val
+	accel += (center_of_gravity-global_position).normalized() * globals.gravity_scale
 	position += velocity * delta + (accel * delta * delta) / 2
-	velocity += accel * delta
+	velocity += accel * delta - velocity * 0.002
 	accel = Vector2.ZERO
 	rotation = (velocity.angle())
 
 	if collideWithMap():
 		globals.draw_explosion(global_position, dmg_radius, dmg)
-		queue_free()
+		destroy()
 		# todo
 		pass
 	pass
+
+func destroy():
+	queue_free()
 
 func _process(delta):
 
