@@ -35,7 +35,6 @@ extents = Vector2( 3, 5 )
 radius = 5.0
 
 [node name="Node2D" type="Node2D"]
-position = Vector2( 498, 330 )
 script = ExtResource( 9 )
 
 [node name="Core" type="RigidBody2D" parent="."]
@@ -54,6 +53,7 @@ shape = SubResource( 2 )
 [node name="Core2" type="RigidBody2D" parent="."]
 position = Vector2( -24, 163 )
 rotation = 1.86809
+mass = 100.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -67,8 +67,26 @@ texture = ExtResource( 6 )
 position = Vector2( 0, -1 )
 polygon = PoolVector2Array( -77, -118, -84, -89, -73, -40, -98, -57, -116, -29, -103, 14, -79, 21, -95, 51, -91, 81, -57, 68, -63, 99, -52, 115, -8, 90, 21, 112, 51, 110, 69, 122, 81, 116, 76, 83, 109, 91, 102, 75, 113, 73, 110, 43, 65, -34, 48, -40, 25, -79, 9, -87, -1, -102 )
 
+[node name="Core7" type="RigidBody2D" parent="."]
+position = Vector2( -282, 27 )
+rotation = 3.85541
+mass = 100.0
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Core7"]
+texture = ExtResource( 6 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Core7"]
+position = Vector2( 0, -1 )
+polygon = PoolVector2Array( -77, -118, -84, -89, -73, -40, -98, -57, -116, -29, -103, 14, -79, 21, -95, 51, -91, 81, -57, 68, -63, 99, -52, 115, -8, 90, 21, 112, 51, 110, 69, 122, 81, 116, 76, 83, 109, 91, 102, 75, 113, 73, 110, 43, 65, -34, 48, -40, 25, -79, 9, -87, -1, -102 )
+
 [node name="Core3" type="RigidBody2D" parent="."]
 position = Vector2( 109, -135 )
+mass = 100.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -84,6 +102,7 @@ polygon = PoolVector2Array( -77, -118, -84, -89, -73, -40, -98, -57, -116, -29, 
 
 [node name="Core4" type="RigidBody2D" parent="."]
 position = Vector2( -95, -93 )
+mass = 50.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -99,6 +118,7 @@ polygon = PoolVector2Array( -69, 53, -73, 0, -66, -41, -39, -27, -13, -72, 3, -7
 
 [node name="Core5" type="RigidBody2D" parent="."]
 position = Vector2( -124, 24 )
+mass = 30.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -114,7 +134,8 @@ polygon = PoolVector2Array( -24, -49, -28, -20, -35, -7, -26, 8, -33, 22, -32, 2
 
 [node name="Core6" type="RigidBody2D" parent="."]
 position = Vector2( 106, 70 )
-rotation = -3.13688
+rotation = -3.13299
+mass = 30.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -130,7 +151,8 @@ polygon = PoolVector2Array( -24, -49, -28, -20, -35, -7, -26, 8, -33, 22, -32, 2
 
 [node name="Tesla" type="RigidBody2D" parent="."]
 position = Vector2( 38, 43 )
-rotation = 2.8496
+rotation = -0.0706685
+mass = 10.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -151,6 +173,7 @@ shape = SubResource( 7 )
 
 [node name="Rover1" type="RigidBody2D" parent="."]
 position = Vector2( 171, 9 )
+mass = 10.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -181,9 +204,9 @@ shape = SubResource( 5 )
 
 [node name="Rover2" type="RigidBody2D" parent="."]
 position = Vector2( -45, -172 )
+mass = 10.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
-angular_velocity = 1.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -213,6 +236,7 @@ shape = SubResource( 5 )
 
 [node name="Rover3" type="RigidBody2D" parent="."]
 position = Vector2( -158, 115 )
+mass = 10.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -244,6 +268,7 @@ shape = SubResource( 5 )
 
 [node name="Rover4" type="RigidBody2D" parent="."]
 position = Vector2( -204, 32 )
+mass = 10.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
 __meta__ = {
@@ -277,8 +302,10 @@ shape = SubResource( 5 )
 
 [node name="wheel" type="RigidBody2D" parent="wheels"]
 position = Vector2( 89, 8 )
+mass = 0.2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -292,8 +319,10 @@ shape = SubResource( 8 )
 
 [node name="wheel2" type="RigidBody2D" parent="wheels"]
 position = Vector2( 89, 8 )
+mass = 0.2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -307,8 +336,10 @@ shape = SubResource( 8 )
 
 [node name="wheel3" type="RigidBody2D" parent="wheels"]
 position = Vector2( 89, 8 )
+mass = 0.2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -322,8 +353,10 @@ shape = SubResource( 8 )
 
 [node name="wheel4" type="RigidBody2D" parent="wheels"]
 position = Vector2( 89, 8 )
+mass = 0.2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -337,8 +370,10 @@ shape = SubResource( 8 )
 
 [node name="wheel5" type="RigidBody2D" parent="wheels"]
 position = Vector2( 89, 8 )
+mass = 0.2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -352,8 +387,10 @@ shape = SubResource( 8 )
 
 [node name="wheel6" type="RigidBody2D" parent="wheels"]
 position = Vector2( 89, 8 )
+mass = 0.2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -367,8 +404,10 @@ shape = SubResource( 8 )
 
 [node name="wheel7" type="RigidBody2D" parent="wheels"]
 position = Vector2( 89, 8 )
+mass = 0.2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -382,8 +421,10 @@ shape = SubResource( 8 )
 
 [node name="wheel8" type="RigidBody2D" parent="wheels"]
 position = Vector2( 89, 8 )
+mass = 0.2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -395,6 +436,108 @@ texture = ExtResource( 4 )
 modulate = Color( 0.419608, 0.419608, 0.419608, 1 )
 shape = SubResource( 8 )
 
+[node name="wheel9" type="RigidBody2D" parent="wheels"]
+position = Vector2( 89, 8 )
+mass = 0.2
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="wheels/wheel9"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/wheel9"]
+modulate = Color( 0.419608, 0.419608, 0.419608, 1 )
+shape = SubResource( 8 )
+
+[node name="wheel10" type="RigidBody2D" parent="wheels"]
+position = Vector2( 89, 8 )
+mass = 0.2
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="wheels/wheel10"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/wheel10"]
+modulate = Color( 0.419608, 0.419608, 0.419608, 1 )
+shape = SubResource( 8 )
+
+[node name="wheel11" type="RigidBody2D" parent="wheels"]
+position = Vector2( 89, 8 )
+mass = 0.2
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="wheels/wheel11"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/wheel11"]
+modulate = Color( 0.419608, 0.419608, 0.419608, 1 )
+shape = SubResource( 8 )
+
+[node name="wheel12" type="RigidBody2D" parent="wheels"]
+position = Vector2( 89, 8 )
+mass = 0.2
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="wheels/wheel12"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/wheel12"]
+modulate = Color( 0.419608, 0.419608, 0.419608, 1 )
+shape = SubResource( 8 )
+
+[node name="wheel13" type="RigidBody2D" parent="wheels"]
+position = Vector2( 89, 8 )
+mass = 0.2
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="wheels/wheel13"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/wheel13"]
+modulate = Color( 0.419608, 0.419608, 0.419608, 1 )
+shape = SubResource( 8 )
+
+[node name="wheel14" type="RigidBody2D" parent="wheels"]
+position = Vector2( 89, 8 )
+mass = 0.2
+physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
+can_sleep = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="wheels/wheel14"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wheels/wheel14"]
+modulate = Color( 0.419608, 0.419608, 0.419608, 1 )
+shape = SubResource( 8 )
+
 [node name="debris" type="Node2D" parent="."]
 
 [node name="Core6" type="RigidBody2D" parent="debris"]
@@ -402,6 +545,7 @@ position = Vector2( -61, 13 )
 rotation = 2.65143
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -418,6 +562,7 @@ position = Vector2( 30, -37 )
 rotation = 1.42508
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -434,6 +579,7 @@ position = Vector2( 56, 5 )
 rotation = -1.66318
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -450,6 +596,7 @@ position = Vector2( 102, -10 )
 rotation = 1.51311
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -466,6 +613,7 @@ position = Vector2( -12, -47 )
 rotation = -1.57167
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -482,6 +630,7 @@ position = Vector2( -23, 47 )
 rotation = -2.29183
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }
@@ -497,6 +646,7 @@ polygon = PoolVector2Array( -11, -11, -10, 2, -12, 6, -4, 13, 12, 7, 5, -10 )
 position = Vector2( -40, -21 )
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
+can_sleep = false
 __meta__ = {
 "_edit_group_": true
 }

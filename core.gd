@@ -19,4 +19,6 @@ func _ready():
 func _on_core_area_entered(area):
 	if area is Bullet:
 		($"../endgame_timer" as Timer).start()
+#		($"../spawn_timer" as Timer).start()
+#		get_parent().start_endgame()
 	pass # Replace with function body.

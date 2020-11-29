@@ -203,9 +203,9 @@ func process_stun(delta):
 func shoot_bullet(b):
 	var bullet = b.instance()
 	bullet.shooter_id=player
-	bullet.global_position=aim.global_position
+	bullet.global_position = aim.global_position - globals.center.position
 	bullet.velocity=Vector2(0,-300).rotated(aim.global_rotation)
-	get_parent().add_child(bullet)
+	get_parent().get_node("Center").add_child(bullet)
 	return bullet
 
 func action(action: String):

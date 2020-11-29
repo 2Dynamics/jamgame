@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Nodes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://crack.png" type="Texture" id=2]
@@ -44,20 +44,21 @@ func _ready() -> void:
 			players.append(child)
 
 func _physics_process(delta: float) -> void:
-	var ul = Vector2(99999, 99999)
-	var dr = Vector2(-99999, -99999)
-	
-	for player in players:
-		ul = Vector2(min(ul.x, player.global_position.x), min(ul.y, player.global_position.y))
-		dr = Vector2(max(dr.x, player.global_position.x), max(dr.y, player.global_position.y))
-	global_position = (ul + dr) * 0.5
-	
-	var d = dr - ul
-	var zx = max(d.x - 600, 0)
-	var zy = max(d.y - 600, 0)
-	var z = max(zx, zy) * 0.001
-	
-	zoom = Vector2.ONE * (1 + z)
+	if !get_parent().endgame:
+		var ul = Vector2(99999, 99999)
+		var dr = Vector2(-99999, -99999)
+		
+		for player in players:
+			ul = Vector2(min(ul.x, player.global_position.x), min(ul.y, player.global_position.y))
+			dr = Vector2(max(dr.x, player.global_position.x), max(dr.y, player.global_position.y))
+		global_position = (ul + dr) * 0.5
+		
+		var d = dr - ul
+		var zx = max(d.x - 600, 0)
+		var zy = max(d.y - 600, 0)
+		var z = max(zx, zy) * 0.001
+		
+		zoom = Vector2.ONE * (1 + z)
 "
 
 [sub_resource type="CanvasItemMaterial" id=4]
@@ -127,6 +128,34 @@ radius = 92.2693
 [sub_resource type="DynamicFont" id=9]
 size = 30
 font_data = ExtResource( 13 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "end"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("CanvasLayer2/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CanvasLayer2/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 12 )
@@ -232,6 +261,9 @@ shape = SubResource( 8 )
 [node name="endgame_timer" type="Timer" parent="."]
 wait_time = 0.014
 
+[node name="spawn_timer" type="Timer" parent="."]
+wait_time = 0.5
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
@@ -261,5 +293,21 @@ stream = ExtResource( 14 )
 volume_db = -10.0
 pitch_scale = 0.8
 
-[connection signal="area_entered" from="core" to="core" method="_on_core_area_entered"]
+[node name="endgame" type="AnimationPlayer" parent="."]
+anims/end = SubResource( 10 )
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+margin_left = -60.0
+margin_top = -440.0
+margin_right = 1988.0
+margin_bottom = 1608.0
+color = Color( 1, 1, 1, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="area_entered" from="core" to="core" method="_on_core_area_entered" flags=3]
 [connection signal="timeout" from="endgame_timer" to="." method="_on_endgame_timer_timeout"]
+[connection signal="timeout" from="spawn_timer" to="." method="_on_spawn_timer_timeout"]

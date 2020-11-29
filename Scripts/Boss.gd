@@ -24,7 +24,7 @@ var is_in_orbit := false
 var orbit_angle := 0.0 
 var speed = 0.05
 
-export var ufos_to_spawn := 10
+export var ufos_to_spawn := 4
 var spawn_side := 1
 
 const eneny_id = 1999

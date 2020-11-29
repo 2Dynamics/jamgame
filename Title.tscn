@@ -5,15 +5,15 @@
 [ext_resource path="res://sfx/music.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Title.gd" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 100
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 30
 font_data = ExtResource( 2 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "stop_music"
 tracks/0/type = "value"
 tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
@@ -61,7 +61,7 @@ margin_left = -313.5
 margin_top = 335.0
 margin_right = 313.5
 margin_bottom = 449.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "PRESS ANY KEY"
 align = 1
 __meta__ = {
@@ -73,7 +73,7 @@ margin_left = 26.4364
 margin_top = 20.231
 margin_right = 207.436
 margin_bottom = 54.231
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "HIGHSCORE 0"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -85,4 +85,4 @@ volume_db = 10.0
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/stop_music = SubResource( 4 )
+anims/stop_music = SubResource( 3 )
