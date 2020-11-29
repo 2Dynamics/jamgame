@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://sprite/missile_boat.png" type="Texture" id=2]
+[ext_resource path="res://sprite/invader_1.png" type="Texture" id=2]
 [ext_resource path="res://sprite/explosion2.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 17, 16 )
+extents = Vector2( 17, 25 )
 
 [sub_resource type="Animation" id=2]
 length = 0.9
@@ -114,7 +114,6 @@ hue_variation_random = 1.0
 [node name="Enemy" type="Area2D" groups=[
 "enemies",
 ]]
-scale = Vector2( 2, 2 )
 script = ExtResource( 1 )
 spawn_distance = 2000.0
 orbit_distance = 600.0
@@ -132,6 +131,7 @@ texture = ExtResource( 2 )
 anims/boom = SubResource( 2 )
 
 [node name="explosion" type="Sprite" parent="."]
+visible = false
 texture = ExtResource( 3 )
 hframes = 4
 vframes = 4

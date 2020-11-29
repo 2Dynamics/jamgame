@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/256268__jmayoff__space-ship-taking-off.wav-7ff6bf8c3af5d405bc7f6faf39c66bc1.sample"
+
+[deps]
+
+source_file="res://sfx/256268__jmayoff__space-ship-taking-off.wav"
+dest_files=[ "res://.import/256268__jmayoff__space-ship-taking-off.wav-7ff6bf8c3af5d405bc7f6faf39c66bc1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,18 +1,16 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Laser.gd" type="Script" id=1]
-[ext_resource path="res://sprite/boom_1.png" type="Texture" id=2]
-[ext_resource path="res://sprite/fire.png" type="Texture" id=3]
+[ext_resource path="res://sprite/bomb.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 18, 3 )
+[sub_resource type="CircleShape2D" id=1]
+radius = 10.7373
 
 [sub_resource type="Animation" id=2]
 resource_name = "Ogniowanie"
 length = 0.4
-loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("AnimationPlayer/fire:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -24,6 +22,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1 ]
 }
 
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 7 )
+
 [node name="Fire" type="Area2D"]
 script = ExtResource( 1 )
 dmg = 8000
@@ -31,28 +32,26 @@ dmg_radius = 40
 gravity_scale = 0.0
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -8.60813, 0 )
 texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 emitting = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "Ogniowanie"
 anims/Ogniowanie = SubResource( 2 )
-
-[node name="fire" type="Sprite" parent="AnimationPlayer"]
-position = Vector2( -23, 0 )
-texture = ExtResource( 3 )
-vframes = 3
-frame = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( -19, 0 )
+shape = SubResource( 3 )
 
 [connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

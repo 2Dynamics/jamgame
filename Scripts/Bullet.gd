@@ -12,7 +12,7 @@ var velocity := Vector2.ZERO
 func set_shooter_id(id):
 	shooter_id=id
 	if shooter_id < 0 or shooter_id>3:
-		modulate=Color(1,0,0)
+		modulate=Color(1,1,0)
 
 func get_shooter_id():
 	return shooter_id
@@ -20,9 +20,9 @@ func _enter_tree():
 	set_meta("bullet", true)
 
 func _ready():
-	if !has_node("AudioStreamPlayer2D"):
+	if !has_node("AudioStreamPlayer"):
 		add_child(preload("res://Nodes/fire_sound_default.tscn").instance())
-	connect("tree_exiting", globals, "kill_sound", [$AudioStreamPlayer2D])
+	connect("tree_exiting", globals, "kill_sound", [$AudioStreamPlayer])
 
 func _physics_process(delta):
 	var grav = global_position.direction_to(globals.center.global_position)
@@ -52,7 +52,7 @@ func _on_Bullet_area_entered(area):
 			on_hit()
 	elif area.is_in_group("enemies"):
 		if shooter_id != area.eneny_id:
-			area.clear()
+			area.damage(dmg)
 			on_hit()
 	elif area.has_meta("bullet"):
 		if shooter_id == -1 or shooter_id == load("res://Scripts/Enemy.gd").eneny_id:

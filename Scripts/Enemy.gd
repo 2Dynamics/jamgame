@@ -1,9 +1,9 @@
 extends Node2D
 class_name Enemy
 
-var bullet_object := load("res://Nodes/Laser.tscn")
+var bullet_object := load("res://Nodes/FireEnemy.tscn")
 
-export var life := 600.0
+export var life := 20000.0
 
 export var shoot_delay := 5.0
 export var bullet_speed:= 100.0
@@ -12,7 +12,6 @@ export var spawn_distance := 500.0
 export var orbit_distance := 10.0
 export var orbit_variance := 10.0
 export var orbit_speed := 0.1
-
 
 var velocity := Vector2.ZERO
 
@@ -30,9 +29,14 @@ var is_alive = true
 onready var sprite = $ufo
 
 func _ready():
+	$explosion.rotation = rand_range(0,TAU) 
 	$ufo.visible = true
 	$explosion.visible = false
 	$Timer.wait_time = shoot_delay
+	$ufo.texture = load("res://sprite/invader_"+str(randi()%2+1)+".png")
+	orbit_distance += rand_range(- orbit_variance,orbit_variance)
+	orbit_angle = rand_range( 0, TAU )
+	speed += rand_range(-0.01,0.01)
 	spawn()
 
 func _physics_process(delta):
@@ -51,14 +55,9 @@ func _physics_process(delta):
 	position += velocity * delta
 	
 	sprite.rotation = (position.angle())
-#	damege()
-		
-		
+
+
 func spawn():
-	$explosion.rotation = rand_range(0,TAU) 
-	orbit_distance += rand_range(-orbit_variance,orbit_variance)
-	speed += rand_range(-0.01,0.01)
-	orbit_angle = rand_range( 0, TAU )
 	position = Vector2( cos(orbit_angle), sin(orbit_angle) ) * spawn_distance
 	var angle_shift = rand_range(-0.1, 0.1)
 	orbit_angle += angle_shift
@@ -68,22 +67,24 @@ func spawn():
 func shoot():
 	var new_bullet := bullet_object.instance() as Bullet
 	get_parent().add_child( new_bullet )
-	new_bullet.velocity = - position.normalized().rotated(-PI/2.0) * bullet_speed
+	new_bullet.velocity = - position.normalized() * bullet_speed
 	new_bullet.position = position
 	new_bullet.dmg = 20000
 	new_bullet.dmg_radius = 100
 	new_bullet.shooter_id = eneny_id
 
-func damege():
-	life -= 1
+func damage(dmg):
+	life -= dmg
 	if is_alive && life <= 0:
 		is_alive = false
 		$Particles2D.process_material.set("gravity", - position.normalized() * globals.gravity_scale)
 		$Player.play("boom")
+		globals.add_score(100)
+		queue_free()
 	
 func _on_Timer_timeout():
 	shoot()
 
-func clear():
-	globals.add_score(100)
-	queue_free()
+#func clear():
+#	damege()
+

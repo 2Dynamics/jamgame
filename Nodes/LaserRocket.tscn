@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/LaserRocket.gd" type="Script" id=1]
-[ext_resource path="res://sprite/rocket.png" type="Texture" id=2]
+[ext_resource path="res://sprite/drone2.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 0 )
@@ -24,8 +24,9 @@ hue_variation_random = 1.0
 [sub_resource type="CircleShape2D" id=4]
 
 [sub_resource type="Animation" id=5]
-length = 0.3
+length = 0.75
 loop = true
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -33,20 +34,24 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0 ]
 }
 
 [node name="Rocket" type="Area2D"]
-modulate = Color( 1, 0, 0, 1 )
 script = ExtResource( 1 )
 dmg = 20000
 dmg_radius = 160
 
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 2
+frame = 2
+
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( -16.617, 0 )
 amount = 30
 local_coords = false
 process_material = SubResource( 3 )
@@ -57,10 +62,6 @@ shape = SubResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Rakietowanie"
 anims/Rakietowanie = SubResource( 5 )
-
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-vframes = 3
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

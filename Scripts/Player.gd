@@ -24,9 +24,11 @@ var collider_directions: Array
 var previous_wheel_rotation := 0.0
 var current_wheel_rotation := 0.0
 
+var heal_ready = true
+
 export var color:Color
 
-enum {LASER = -1, ROCKET, HEALING_ROCKET, FAT_LASER, FIRE, LASER_ROCKET, HOMING_ROCKET, LONG_LASER}
+enum {LASER = -1, ROCKET, FAT_LASER, FIRE, LASER_ROCKET, HOMING_ROCKET, LONG_LASER}
 
 var front := Vector2.ZERO
 var up := Vector2.ZERO
@@ -170,16 +172,24 @@ func process_mouse_aim():
 			aim.global_rotation = (current_mouse_pos-aim.global_position).angle()+PI*0.5
 
 func process_weapons():
-	if (stun_time <= 0) and Input.is_action_just_pressed(action("shoot")):
-		var bullet = [laser_scene, rocket_scene, heal_rocket_scene,
-			fat_laser_scene, fire_scene, laser_rocket_scene, homing_rocket_scene,
-			long_laser_scene][weapon + 1]
-#		bullet = homing_rocket_scene #debug
-		bullet = shoot_bullet(bullet)
-		match weapon:
-			HOMING_ROCKET:
-				bullet.velocity *= 2
-				
+	if (stun_time <= 0):
+		if Input.is_action_just_pressed(action("shoot")):
+			var bullet = [laser_scene, rocket_scene,
+				fat_laser_scene, fire_scene, laser_rocket_scene, homing_rocket_scene,
+				long_laser_scene][weapon + 1]
+#			var bullet = [laser_scene, rocket_scene, heal_rocket_scene,
+#				fat_laser_scene, fire_scene, laser_rocket_scene, homing_rocket_scene,
+#				long_laser_scene][weapon + 1]
+	#		bullet = homing_rocket_scene #debug
+			bullet = shoot_bullet(bullet)
+			match weapon:
+				HOMING_ROCKET:
+					bullet.velocity *= 2
+		if heal_ready && Input.is_action_just_pressed(action("shoot_secondary")) :
+			var bullet = shoot_bullet(heal_rocket_scene)
+			heal_ready = false
+			$heal_cooldown.start()
+
 
 func process_stun(delta):
 
@@ -210,3 +220,8 @@ func setStun():
 func setReparableTime(w: int):
 	reparable_time = 10
 	weapon = w
+
+
+func _on_heal_cooldown_timeout():
+	heal_ready = true
+	$heal_cooldown.stop()

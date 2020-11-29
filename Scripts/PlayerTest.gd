@@ -4,14 +4,17 @@ onready var score = $CanvasLayer/Label
 
 var pickupableitem_scene := load("res://Nodes/PickupableItem.tscn")
 var enemy_scene := load("res://Nodes/Enemy.tscn")
+var boss_scene := load("res://Nodes/Boss.tscn")
 
 var spawn_pickupable_time = 5
 var spawn_pickupable_timer = 0
-var min_spawn_pickupableitem_radius = 80
-var max_spawn_pickupableitem_radius = 300
+var min_spawn_pickupableitem_radius = 120
+var max_spawn_pickupableitem_radius = 400
 
 var spawn_enemy_time = 20
 var spawn_enemy_timer = 0
+
+
 
 func _ready() -> void:
 	randomize()
@@ -39,14 +42,26 @@ func _process(delta):
 		add_child(pickupable_item)
 		pickupable_item.global_position = globals.center.global_position + Vector2(spawn_radius, 0).rotated(spawn_angle)
 
-	if spawn_enemy_timer < spawn_pickupable_time:
+	if spawn_enemy_timer < spawn_enemy_time:
 		spawn_enemy_timer += delta
 	else:
 		spawn_enemy_timer = 0
 		var enemy = enemy_scene.instance()
 		$Center.add_child(enemy)
-	pass
-
+		
+	if !$Center.has_node("Boss1"):
+		var boss = boss_scene.instance()
+		boss.name = "Boss1"
+		boss.start_timer = 10.0
+		boss.orbit_side = 1
+		$Center.add_child(boss)
+#		boss.get_node("Start_Timer").wait_time = 10.0
+	if !$Center.has_node("Boss2"):
+		var boss = boss_scene.instance()
+		boss.name = "Boss2"
+		boss.start_timer = 10.0
+		$Center.add_child(boss)
+#		boss.get_node("Start_Timer").wait_time = 10.0
 
 var endgame: int
 

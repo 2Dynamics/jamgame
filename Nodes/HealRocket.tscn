@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/HealRocket.gd" type="Script" id=1]
-[ext_resource path="res://sprite/rocket.png" type="Texture" id=2]
+[ext_resource path="res://sprite/fire_more.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 0, 0, 1, 1, 0, 0, 0 )
@@ -22,9 +22,10 @@ hue_variation = 0.11
 hue_variation_random = 1.0
 
 [sub_resource type="CircleShape2D" id=4]
+radius = 5.0
 
 [sub_resource type="Animation" id=5]
-length = 0.3
+length = 0.6
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -33,27 +34,27 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 1, 2, 3, 2, 1 ]
 }
 
 [node name="HealRocket" type="Area2D"]
-modulate = Color( 0, 1, 0, 1 )
 script = ExtResource( 1 )
-dmg = 10000
-dmg_radius = 40
+dmg = 5000
+dmg_radius = 30
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( -16.617, 0 )
 amount = 30
 local_coords = false
 process_material = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -4, 0 )
 texture = ExtResource( 2 )
-vframes = 3
+vframes = 4
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
