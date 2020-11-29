@@ -57,6 +57,7 @@ vframes = 3
 
 [node name="Sprite7" type="Sprite" parent="Icons"]
 visible = false
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 
 [connection signal="area_entered" from="." to="." method="_on_PickupableItem_area_entered"]

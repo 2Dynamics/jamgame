@@ -34,10 +34,13 @@ func _physics_process(delta):
 
 	if collideWithMap():
 		on_map_hit()
+		
+	check_screen_borders()
 
 func collideWithMap() -> bool:
 	return globals.map.is_pixel_solid_v(global_position)
-
+	
+func check_screen_borders():pass
 func on_hit(): pass
 func on_map_hit():
 	on_hit()

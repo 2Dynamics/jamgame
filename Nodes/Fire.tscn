@@ -8,7 +8,7 @@ radius = 5.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "Ogniowanie"
-length = 0.3
+length = 0.4
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -17,10 +17,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2 ]
+"values": [ 0, 1, 2, 1 ]
 }
 
 [node name="Fire" type="Area2D"]
@@ -47,6 +47,7 @@ autostart = true
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 3
+frame = 1
 
 [connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
