@@ -1,27 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://marsdefense-splash.png" type="Texture" id=1]
 [ext_resource path="res://Bauhaus 93 Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://sfx/music.ogg" type="AudioStream" id=3]
-
-[sub_resource type="GDScript" id=1]
-script/source = "extends TextureRect
-
-func _ready() -> void:
-	var f = File.new()
-	if f.file_exists(\"user://score\"):
-		f.open(\"user://score\", f.READ)
-		$Label2.text = \"HIGHSCORE \" + f.get_line()
-	else:
-		$Label2.hide()
-
-func _input(event: InputEvent) -> void:
-	if event.is_pressed():
-		$Label.text = \"LOADING\"
-		yield(get_tree(), \"idle_frame\")
-		yield(get_tree(), \"idle_frame\")
-		get_tree().change_scene(\"res://PlayerTest.tscn\")
-"
+[ext_resource path="res://Title.gd" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=2]
 size = 100
@@ -31,12 +13,41 @@ font_data = ExtResource( 2 )
 size = 30
 font_data = ExtResource( 2 )
 
+[sub_resource type="Animation" id=4]
+resource_name = "stop_music"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 10.0, -80.0 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_game"
+} ]
+}
+
 [node name="TextureRect" type="TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
 expand = true
-script = SubResource( 1 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,3 +83,6 @@ __meta__ = {
 stream = ExtResource( 3 )
 volume_db = 10.0
 autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/stop_music = SubResource( 4 )

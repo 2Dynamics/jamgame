@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/516914__kinoton__explosion-medium-blast2.wav-44907b39e359d01bf4c61e7e1a1e6db8.sample"
+
+[deps]
+
+source_file="res://sfx/516914__kinoton__explosion-medium-blast2.wav"
+dest_files=[ "res://.import/516914__kinoton__explosion-medium-blast2.wav-44907b39e359d01bf4c61e7e1a1e6db8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

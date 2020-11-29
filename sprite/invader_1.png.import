@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/explosion2.png-c1b11424a81adb65d9901e614b947aeb.stex"
+path="res://.import/invader_1.png-88b64010b28fe37f4e1d07a2119dfc14.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/explosion2.png"
-dest_files=[ "res://.import/explosion2.png-c1b11424a81adb65d9901e614b947aeb.stex" ]
+source_file="res://sprite/invader_1.png"
+dest_files=[ "res://.import/invader_1.png-88b64010b28fe37f4e1d07a2119dfc14.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

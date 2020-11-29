@@ -49,7 +49,7 @@ func draw_image(position: Vector2, brush_image, positive: int):
 var center: Node2D
 var map: DynamicGridMap
 
-var gravity_scale := 98.0
+var gravity_scale := 98.0 *0.5
 var gravity_center :Vector2
 var center_of_gravity :Vector2
 
