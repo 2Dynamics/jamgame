@@ -36,11 +36,11 @@ On the occasion of the upcoming 30th anniversary of the classic game Scorched Ea
 **Open source**
 
 - The Godot engine was used to create the game (MIT license)
-- FX sounds from http://freesound.com/ were used (Creative Commons 0 license), but own music
+- FX sounds from http://freesound.org/ were used (Creative Commons 0 license), but own music
 - No other assets were used
 
 **HackYeah**
 
 Oświadczenie: Zespół 2Dynamic spełnia pkt 6 Regulaminu konkursu (nagroda PAIH).
 
-Uruchomienie: Aby uruchomić grę należy pobrać plik ZIP z udostępnionego repozytorium na GitHubie (sekcja releases) a następnie go rozpakować i kliknąć w plik Uruchom.bat. Gra działa na systemie Windows 10).
+Uruchomienie: Aby uruchomić grę należy pobrać plik ZIP z udostępnionego repozytorium na GitHubie (sekcja releases) a następnie go rozpakować i kliknąć w plik Uruchom.bat. Gra działa na systemie Windows 10.
