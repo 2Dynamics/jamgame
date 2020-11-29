@@ -6,6 +6,3 @@ func on_hit():
 	get_parent().add_child(expl)
 	expl.global_position = global_position
 	queue_free()
-
-func _on_Timer_timeout() -> void:
-	queue_free()

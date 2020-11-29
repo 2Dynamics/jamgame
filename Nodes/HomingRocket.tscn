@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scripts/Rocket.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/HomingRocket.gd" type="Script" id=1]
 [ext_resource path="res://sprite/rocket.png" type="Texture" id=2]
 
 [sub_resource type="Gradient" id=1]
@@ -40,9 +40,11 @@ tracks/0/keys = {
 }
 
 [node name="Rocket" type="Area2D"]
+modulate = Color( 0.686275, 0, 1, 1 )
 script = ExtResource( 1 )
 dmg = 20000
 dmg_radius = 160
+gravity_scale = 0.5
 
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( -16.617, 0 )

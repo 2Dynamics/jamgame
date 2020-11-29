@@ -1,6 +1,12 @@
 extends Node2D
 
+var score = 0
 
+signal score_changed
+
+func add_score(s):
+	score += s
+	emit_signal("score_changed")
 
 func draw_explosion(position: Vector2, radius: float, damage: float):
 	radius = map.update_grid_penetrating_explosive_damage_circle(position, radius, damage, 0.3)
@@ -15,7 +21,7 @@ func draw_explosion(position: Vector2, radius: float, damage: float):
 
 
 func draw_heal(position: Vector2, radius: float, heal: float):
-	map.update_grid_damage_circle_hardness(position, radius, -heal, 1)
+	map.update_grid_damage_circle_hardness(position, radius, -heal, 10)
 	
 	var x := clamp(position.x - radius, 0, map.get_texture().get_width())
 	var y := clamp(position.y - radius, 0, map.get_texture().get_height())
@@ -46,3 +52,8 @@ var map: DynamicGridMap
 var gravity_scale := 98.0
 var gravity_center :Vector2
 var center_of_gravity :Vector2
+
+func kill_sound(player):
+	player.get_parent().remove_child(player)
+	add_child(player)
+	player.connect("finished", player, "queue_free")
